@@ -1,25 +1,59 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
-import './budget-forms.css'
+import { React, useEffect, useState } from "react";
+import { Form, Button, FloatingLabel, Row, Col } from "react-bootstrap";
+import CurrencyList from "currency-list";
+import "./budget-forms.css";
 
-export default function BudgetForms({ placeholder, type, ...otherProps }) {
+export default function BudgetForms({
+  placeholder,
+  type,
+  label,
+  ...otherProps
+}) {
+  const [currencyList, setCurrencyList] = useState();
+
+  useEffect(() => {
+    console.log(CurrencyList.getAll("en_GB"));
+    setCurrencyList(CurrencyList.getAll("en_GB"));
+  }, []);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const budgetValue = e.target.elements.budget.value;
+    const currencyValue= e.target.elements.currency.value
+    console.log(`for submitted`);
+    console.log(currencyValue);
+  };
   return (
     <>
-      <Form>
-        <Form.Group
-          className="mb-3 input-forms__container"
-          controlId="formBasicEmail"
-        >
-          <Form.Label className="input-forms__label">Email address</Form.Label>
-          <Form.Control
-            className="input-forms__input"
-            type="email"
-            placeholder="Enter email"
-          />
-          <Form.Text className="text-muted input-forms__forms-text">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+      <Form onSubmit={(e) => submitHandler(e)}>
+        <Row className="g-2 input-forms__container">
+          <Col md>
+            <FloatingLabel controlId="floatingInputGrid" label={label}>
+              <Form.Control
+                type={type}
+                placeholder={placeholder}
+                name="budget"
+              />
+            </FloatingLabel>
+          </Col>
+          <Col md>
+            <FloatingLabel
+              controlId="floatingSelectGrid"
+              label="Choose Currency"
+            >
+              <Form.Select aria-label="Floating label select example" name="currency">
+                {currencyList
+                  ? Object.keys(currencyList).map((data, index) => {
+                      return (
+                        <option key={index} value={currencyList[data].code}>
+                          {currencyList[data].code}{" "}
+                        </option>
+                      );
+                    })
+                  : ""}
+              </Form.Select>
+            </FloatingLabel>
+          </Col>
+        </Row>
         <Button variant="primary" type="submit">
           Submit
         </Button>

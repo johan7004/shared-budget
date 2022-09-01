@@ -20,6 +20,9 @@ export default function NavigationBar() {
               <Nav.Link as={Link} to="overall-expenses">
                 Expenses
               </Nav.Link>
+              <Nav.Link as={Link} to="sign-in">
+                SIGN IN
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
