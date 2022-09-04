@@ -25,9 +25,9 @@ export default function BudgetSummary() {
 
   useEffect(() => {
     if (budgetValues) {
-      const { weeklyBudget, monthlyBudget, currencyValue } = budgetValues;
+      const { weeklyBudget, monthlyBudget, currencyValue,weekTarget } = budgetValues;
       setWeeklyBudget(weeklyBudget);
-      setWeekTarget(weeklyBudget);
+      setWeekTarget(weekTarget);
       setMonthlyBudget(monthlyBudget);
       setCurrencyValue(currencyValue);
     }
