@@ -42,11 +42,11 @@ export default function BudgetSummary() {
   };
 
   useEffect(() => {
-    const userBudget = { weeklyBudgetValue, currencyValue,monthlyBudgetValue };
+    const userBudget = { weeklyBudgetValue, currencyValue,monthlyBudgetValue,weekTarget };
     console.log(`updated values`);
     console.log(userBudget);
     updateUserBudget(userBudget);
-  },[weeklyBudgetValue, currencyValue,monthlyBudgetValue])
+  },[weeklyBudgetValue, currencyValue,monthlyBudgetValue,weekTarget])
 
   return (
     <Container className="summary-container">
