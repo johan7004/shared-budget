@@ -6,6 +6,7 @@
 }
 .card-container__item {
   min-height: 184px;
+  margin: 16px auto;
 }
 
 .expense-form__container--input {
