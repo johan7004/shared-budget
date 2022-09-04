@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import "./sign-in.styles.css";
 
-import { signInWithGooglePopup} from "./../../utils/firebase.config";
+import { signInWithGooglePopup } from "./../../utils/firebase.config";
 
 function SignInForm({
   type,
@@ -12,34 +12,15 @@ function SignInForm({
   placeholder,
   ...otherProps
 }) {
-  const handleSignInSubmit = async () => {
-    await signInWithGooglePopup();
-  };
   const handleSignInGoogle = async () => {
     await signInWithGooglePopup();
   };
 
-  
   return (
     <div className="sign-in__container">
-      <Form>
-        <FloatingLabel
-          controlId="floatingInput"
-          label="Email address"
-          className="mb-3"
-        >
-          <Form.Control type="email" placeholder="name@example.com" />
-        </FloatingLabel>
-        <FloatingLabel controlId="floatingPassword" label="Password">
-          <Form.Control type="password" placeholder="Password" />
-        </FloatingLabel>
-        </Form>
-        <Button variant="primary" type="submit" onClick={handleSignInSubmit}>
-          Submit
-        </Button>
-        <Button variant="primary" type="submit" onClick={handleSignInGoogle}>
-          Sign In With Google
-        </Button>
+      <Button variant="primary" type="submit" onClick={handleSignInGoogle}>
+        Sign In With Google
+      </Button>
     </div>
   );
 }
