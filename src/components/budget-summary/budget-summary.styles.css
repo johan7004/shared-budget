@@ -6,4 +6,8 @@
 }
 .card-container__item {
   min-height: 184px;
+}
+
+.expense-form__container--input {
+  margin-bottom: 16px;
 }/*# sourceMappingURL=budget-summary.styles.css.map */

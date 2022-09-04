@@ -19,8 +19,7 @@ import {
   collection,
   writeBatch,
   query,
-  getDocs
-
+  getDocs,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -28,13 +27,13 @@ import {
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDGUFr2YCxhMDjAMzcX6fH9N2T8GZWBiMI",
-  authDomain: "shared-budget-efd29.firebaseapp.com",
-  projectId: "shared-budget-efd29",
-  storageBucket: "shared-budget-efd29.appspot.com",
-  messagingSenderId: "318593745792",
-  appId: "1:318593745792:web:85cf6e869d780319ae7765",
-  measurementId: "G-BDCCQG7LXT",
+  apiKey: "AIzaSyDyvkoC5GmGwtze6_1Afca5g7oFtiBOAvk",
+  authDomain: "shared-budget-home.firebaseapp.com",
+  projectId: "shared-budget-home",
+  storageBucket: "shared-budget-home.appspot.com",
+  messagingSenderId: "312805157700",
+  appId: "1:312805157700:web:9a2f04e7d8154c45568511",
+  measurementId: "G-K3ZH0J2MT5",
 };
 
 // Initialize Firebase
@@ -62,30 +61,28 @@ export const addCollectionAndDocuments = async (
   const collectionRef = collection(userDb, collectionKey);
   const batch = writeBatch(userDb);
 
-   objectsToAdd.forEach((object)=>{
-     const docRef = doc(collectionRef, object.title.toLowerCase());
-     batch.set(docRef, object);
-   })
-   
-   await batch.commit();
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
 };
 
-export const getCategoriesAndDocuments = async()=>{
-
-  const collectionRef = collection(userDb, 'categories');
-  const categoryquery= query(collectionRef);
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(userDb, "categories");
+  const categoryquery = query(collectionRef);
 
   const querySnapShot = await getDocs(categoryquery);
 
-  const categoryMap = querySnapShot.docs.reduce((acc, docSnapshot)=>{
-    const {title, items} = docSnapshot.data();
+  const categoryMap = querySnapShot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
     acc[title.toLowerCase()] = items;
     return acc;
-  },{});
+  }, {});
 
   return categoryMap;
-
-}
+};
 
 export const createUserDocumentFromAuth = async (
   userAuth,
@@ -97,10 +94,7 @@ export const createUserDocumentFromAuth = async (
   if (!userAuth) return;
   const userDocRef = doc(userDb, "users", userAuth.uid);
 
-  
-
   const userSnapshot = await getDoc(userDocRef);
-  
 
   //if the user does not exists
 
@@ -114,6 +108,11 @@ export const createUserDocumentFromAuth = async (
         email,
         phoneNumber,
         createdAt,
+        budget: {
+          weeklyBudget: null,
+          monthlyBudget: null,
+          currencyValue: null,
+        },
         ...additionalInformation,
       });
     } catch (error) {
@@ -137,3 +136,47 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const updateUserBudget = async (budgetValues) => {
+  if (budgetValues) {
+    const { currencyValue, weeklyBudgetValue, monthlyBudgetValue, weekTarget } =
+      budgetValues;
+
+    const userCollection = collection(userDb, "users");
+    const userId = async () => {
+      if (auth.currentUser) {
+        const { uid } = await auth.currentUser;
+        await setDoc(
+          doc(userCollection, uid),
+          {
+            budget: {
+              weeklyBudget: weeklyBudgetValue,
+              monthlyBudget: monthlyBudgetValue,
+              currencyValue: currencyValue,
+              weekTarget:weekTarget,
+            },
+          },
+          { merge: true }
+        );
+      }
+    };
+
+    return userId();
+  }
+};
+
+export const userBudgetValues = async () => {
+  const userId = async () => {
+    if (auth.currentUser) {
+      const { uid } = await auth.currentUser;
+      const docRef = doc(userDb, "users", uid);
+      const docSnap = await getDoc(docRef);
+      const {budget} = docSnap.data()
+
+      return budget;
+
+    }
+  };
+
+  return userId();
+};

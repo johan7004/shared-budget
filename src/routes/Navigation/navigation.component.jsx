@@ -1,9 +1,17 @@
-import React from "react";
+import { React, useContext } from "react";
 import "./navigation.styles.css";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
+import { UserContext } from "../../components/context/user.context.jsx";
+import { signOutUser } from "../../utils/firebase.config";
 
 export default function NavigationBar() {
+  const { currentUser } = useContext(UserContext);
+
+  const signOutHandle = async () => {
+    await signOutUser();
+  };
+
   return (
     <>
       <Navbar bg="light" expand="lg" className="navigation-container">
@@ -17,11 +25,12 @@ export default function NavigationBar() {
               <Nav.Link as={Link} to="weekly-budget">
                 Weekly Budget
               </Nav.Link>
-              <Nav.Link as={Link} to="overall-expenses">
-                Expenses
-              </Nav.Link>
               <Nav.Link as={Link} to="sign-in">
-                SIGN IN
+                {currentUser ? (
+                  <button onClick={signOutHandle}> SIGN OUT</button>
+                ) : (
+                  "SIGN IN"
+                )}
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

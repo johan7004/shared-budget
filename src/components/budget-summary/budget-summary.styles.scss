@@ -11,3 +11,12 @@
         min-height: 184px;
     }
 }
+
+.expense-form{
+    &__container {
+
+        &--input{
+            margin-bottom:16px;
+        }
+    }
+}

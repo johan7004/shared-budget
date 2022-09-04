@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import "./sign-in.styles.css";
 
-import { signInWithGooglePopup } from "./../../utils/firebase.config";
+import { signInWithGooglePopup} from "./../../utils/firebase.config";
 
 function SignInForm({
   type,
@@ -15,6 +15,11 @@ function SignInForm({
   const handleSignInSubmit = async () => {
     await signInWithGooglePopup();
   };
+  const handleSignInGoogle = async () => {
+    await signInWithGooglePopup();
+  };
+
+  
   return (
     <div className="sign-in__container">
       <Form>
@@ -28,9 +33,12 @@ function SignInForm({
         <FloatingLabel controlId="floatingPassword" label="Password">
           <Form.Control type="password" placeholder="Password" />
         </FloatingLabel>
-      </Form>
+        </Form>
         <Button variant="primary" type="submit" onClick={handleSignInSubmit}>
           Submit
+        </Button>
+        <Button variant="primary" type="submit" onClick={handleSignInGoogle}>
+          Sign In With Google
         </Button>
     </div>
   );
