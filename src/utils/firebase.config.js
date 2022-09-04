@@ -112,6 +112,7 @@ export const createUserDocumentFromAuth = async (
           weeklyBudget: null,
           monthlyBudget: null,
           currencyValue: null,
+    
         },
         ...additionalInformation,
       });

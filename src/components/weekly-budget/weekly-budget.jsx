@@ -17,11 +17,17 @@ function WeeklyBudget() {
     const weeklyBudgetValue = e.target.elements.weeklyBudget.value;
     const monthlyBudgetValue = e.target.elements.monthlyBudget.value;
     const currencyValue = e.target.elements.weeklyCurrency.value;
-    const weekTarget= weeklyBudgetValue;
+    const weekTarget = weeklyBudgetValue;
     console.log(`for submitted ${monthlyBudgetValue}`);
     console.log(currencyValue);
-    const userBudget = { weeklyBudgetValue, currencyValue,monthlyBudgetValue, weekTarget };
+    const userBudget = {
+      weeklyBudgetValue,
+      currencyValue,
+      monthlyBudgetValue,
+      weekTarget,
+    };
     updateUserBudget(userBudget);
+    window.location.href = window.location.origin;
   };
 
   return (

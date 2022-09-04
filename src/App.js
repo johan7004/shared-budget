@@ -21,10 +21,10 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<NavigationBar />}>
+      <Route  path="/" element={<NavigationBar />}>
         <Route index element={<Home />}></Route>
         <Route path="weekly-budget" element={<WeeklyBudgetPage />}></Route>
-        <Route path="sign-in" element={<SignInPage />}></Route>
+        <Route exact path="sign-in" element={<SignInPage />}></Route>
       </Route>
     </Routes>
   );

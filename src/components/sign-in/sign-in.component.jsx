@@ -1,6 +1,7 @@
-import React from "react";
-import {Button} from "react-bootstrap";
+import { React, useContext, useEffect } from "react";
+import { Button } from "react-bootstrap";
 import "./sign-in.styles.css";
+import { UserContext } from "./../context/user.context";
 
 import { signInWithGooglePopup } from "./../../utils/firebase.config";
 
@@ -12,9 +13,16 @@ function SignInForm({
   placeholder,
   ...otherProps
 }) {
+  const { currentUser } = useContext(UserContext);
   const handleSignInGoogle = async () => {
     await signInWithGooglePopup();
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      window.location.href = window.location.origin;
+    }
+  }, [currentUser]);
 
   return (
     <div className="sign-in__container">

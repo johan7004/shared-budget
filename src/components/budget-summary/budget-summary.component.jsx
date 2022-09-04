@@ -1,4 +1,4 @@
-import React from "react";
+import { React, Fragment } from "react";
 import "./budget-summary.styles.css";
 import { Link } from "react-router-dom";
 import {
@@ -13,7 +13,7 @@ import {
 import { useContext } from "react";
 import { BudgetContext } from "../context/budget.context";
 import { useState, useEffect } from "react";
-import {updateUserBudget} from './../../utils/firebase.config.js'
+import { updateUserBudget } from "./../../utils/firebase.config.js";
 
 export default function BudgetSummary() {
   const [weeklyBudgetValue, setWeeklyBudget] = useState();
@@ -25,7 +25,8 @@ export default function BudgetSummary() {
 
   useEffect(() => {
     if (budgetValues) {
-      const { weeklyBudget, monthlyBudget, currencyValue,weekTarget } = budgetValues;
+      const { weeklyBudget, monthlyBudget, currencyValue, weekTarget } =
+        budgetValues;
       setWeeklyBudget(weeklyBudget);
       setWeekTarget(weekTarget);
       setMonthlyBudget(monthlyBudget);
@@ -42,11 +43,16 @@ export default function BudgetSummary() {
   };
 
   useEffect(() => {
-    const userBudget = { weeklyBudgetValue, currencyValue,monthlyBudgetValue,weekTarget };
+    const userBudget = {
+      weeklyBudgetValue,
+      currencyValue,
+      monthlyBudgetValue,
+      weekTarget,
+    };
     console.log(`updated values`);
     console.log(userBudget);
     updateUserBudget(userBudget);
-  },[weeklyBudgetValue, currencyValue,monthlyBudgetValue,weekTarget])
+  }, [weeklyBudgetValue, currencyValue, monthlyBudgetValue, weekTarget]);
 
   return (
     <Container className="summary-container">
@@ -67,15 +73,22 @@ export default function BudgetSummary() {
           <Card className="card-container__item" style={{ width: "18rem" }}>
             <Card.Body>
               <Card.Title>Remaining Budget Funds</Card.Title>
-              <Card.Text>
-                For This Week : {weeklyBudgetValue} {currencyValue}
-              </Card.Text>
-              <Card.Text>
-                For This Month : {monthlyBudgetValue} {currencyValue}
-              </Card.Text>
-              <Card.Text>
-                This week Target : {weekTarget} {currencyValue}
-              </Card.Text>
+
+              {weeklyBudgetValue && monthlyBudgetValue ? 
+                <Fragment>
+                  <Card.Text>
+                    For This Week : {weeklyBudgetValue} {currencyValue}
+                  </Card.Text>
+                  <Card.Text>
+                    For This Month : {monthlyBudgetValue} {currencyValue}
+                  </Card.Text>
+                  <Card.Text>
+                    This week Target : {weekTarget} {currencyValue}
+                  </Card.Text>
+                </Fragment>
+               :
+                "Sign In"
+              }
             </Card.Body>
           </Card>
         </Col>
