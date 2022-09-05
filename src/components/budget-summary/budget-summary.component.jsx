@@ -14,6 +14,7 @@ import { useContext } from "react";
 import { BudgetContext } from "../context/budget.context";
 import { useState, useEffect } from "react";
 import { updateUserBudget } from "./../../utils/firebase.config.js";
+import { UserContext } from "./../context/user.context";
 
 export default function BudgetSummary() {
   const [weeklyBudgetValue, setWeeklyBudget] = useState();
@@ -22,6 +23,7 @@ export default function BudgetSummary() {
   const [weekTarget, setWeekTarget] = useState();
 
   const { budgetValues } = useContext(BudgetContext);
+  const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
     if (budgetValues) {
@@ -49,8 +51,6 @@ export default function BudgetSummary() {
       monthlyBudgetValue,
       weekTarget,
     };
-    console.log(`updated values`);
-    console.log(userBudget);
     updateUserBudget(userBudget);
   }, [weeklyBudgetValue, currencyValue, monthlyBudgetValue, weekTarget]);
 
@@ -74,7 +74,7 @@ export default function BudgetSummary() {
             <Card.Body>
               <Card.Title>Remaining Budget Funds</Card.Title>
 
-              {weeklyBudgetValue && monthlyBudgetValue ? 
+              {currentUser ? (
                 <Fragment>
                   <Card.Text>
                     For This Week : {weeklyBudgetValue} {currencyValue}
@@ -86,9 +86,9 @@ export default function BudgetSummary() {
                     This week Target : {weekTarget} {currencyValue}
                   </Card.Text>
                 </Fragment>
-               :
+              ) : (
                 "Sign In"
-              }
+              )}
             </Card.Body>
           </Card>
         </Col>
