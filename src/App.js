@@ -11,13 +11,14 @@ import { userBudgetValues } from './utils/firebase.config';
 
 function App() {
   const { currentUser } = useContext(UserContext);
-  const { setBudgetValues } = useContext(BudgetContext);
+  const { setBudgetValues,setExpenseValues } = useContext(BudgetContext);
 
   useEffect(() => {
     if (currentUser) {
       userBudgetValues().then((result) => setBudgetValues(result));
+      userBudgetValues().then((result) => setExpenseValues(result.expenses));
     }
-  }, [currentUser,setBudgetValues]);
+  }, [currentUser,setBudgetValues,setExpenseValues]);
 
   return (
     <Routes>

@@ -109,6 +109,7 @@ export const createUserDocumentFromAuth = async (
         phoneNumber,
         createdAt,
         budget: {
+          expenses:[],
           weeklyBudget: null,
           monthlyBudget: null,
           currencyValue: null,
@@ -155,6 +156,7 @@ export const updateUserBudget = async (budgetValues) => {
               monthlyBudget: monthlyBudgetValue,
               currencyValue: currencyValue,
               weekTarget:weekTarget,
+              expenses:[]
             },
           },
           { merge: true }
@@ -165,6 +167,30 @@ export const updateUserBudget = async (budgetValues) => {
     return userId();
   }
 };
+export const updateUserExpense = async (expenseValues) => {
+  if (expenseValues) {
+    
+
+    const userCollection = collection(userDb, "users");
+    const userId = async () => {
+      if (auth.currentUser) {
+        const { uid } = await auth.currentUser;
+        await setDoc(
+          doc(userCollection, uid),
+          {
+            budget: {
+             expenses: expenseValues,
+            },
+          },
+          { merge: true }
+        );
+      }
+    };
+
+    return userId();
+  }
+};
+
 
 export const userBudgetValues = async () => {
   const userId = async () => {
