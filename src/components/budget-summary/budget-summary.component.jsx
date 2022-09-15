@@ -66,7 +66,7 @@ export default function BudgetSummary() {
       <Row>
         <Col className="card-container">
           <Card className="card-container__item" style={{ width: "18rem" }}>
-            <Card.Body>
+            <Card.Body className= "card-container__body">
               <Card.Title>Your Recent Expenses</Card.Title>
 
               {expenses
@@ -86,7 +86,7 @@ export default function BudgetSummary() {
         </Col>
         <Col className="card-container">
           <Card className="card-container__item" style={{ width: "18rem" }}>
-            <Card.Body>
+            <Card.Body className= "card-container__body">
               <Card.Title>Remaining Budget Funds</Card.Title>
 
               {currentUser ? (
@@ -110,7 +110,7 @@ export default function BudgetSummary() {
 
         <Col className="card-container">
           <Card className="card-container__item" style={{ width: "18rem" }}>
-            <Card.Body>
+            <Card.Body className= "card-container__body">
               <Card.Title>Add Expense</Card.Title>
               <Form
                 className="expense-form__container"

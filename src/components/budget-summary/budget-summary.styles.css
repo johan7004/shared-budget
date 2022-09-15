@@ -1,3 +1,6 @@
+.card-container {
+  color: black;
+}
 .card-container button a, .card-container a {
   text-decoration: none;
   color: white;
@@ -7,6 +10,9 @@
 .card-container__item {
   min-height: 184px;
   margin: 16px auto;
+}
+.card-container__body {
+  box-shadow: -5px 10px 10px #d7983d;
 }
 
 .expense-form__container--input {

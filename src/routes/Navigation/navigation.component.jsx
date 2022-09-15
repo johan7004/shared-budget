@@ -29,7 +29,7 @@ export default function NavigationBar() {
                 {currentUser ? (
                   <button onClick={signOutHandle}> SIGN OUT</button>
                 ) : (
-                  "SIGN IN"
+                  "SIGN UP"
                 )}
               </Nav.Link>
             </Nav>

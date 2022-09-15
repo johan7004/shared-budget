@@ -5,13 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(0, 0, 1, 1) 16%,
-    rgba(63, 92, 175, 1) 74%
-  );
+  background:
+  linear-gradient(to left top, rgb(19, 16, 82) 0%/*bottom-right color*/,  rgb(0, 0, 0) 100% /*top-left color*/),
+  linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))/*"faked" black background make sure to add last or it will appear before the transparent/colored layer*/;
 }
 
 code {

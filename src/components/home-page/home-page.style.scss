@@ -1,0 +1,49 @@
+.home-page {
+  &__container {
+    position: absolute;
+    bottom:35%;
+    right:10%;
+    .catch-phrase {
+      &__container {
+        color: #ffffff;
+      }
+      &__item {
+        display: block;
+      }
+    }
+  }
+}
+
+.lineUp {
+  animation: 2s anim-lineUp ease-out;
+  &--second {
+    animation: 2.5s anim-lineUp ease-out;
+  }
+  &--second {
+    animation: 3s anim-lineUp ease-out;
+  }
+  &--third {
+    animation: 3.5s anim-lineUp ease-out;
+  }
+}
+@keyframes anim-lineUp {
+  0% {
+    opacity: 0;
+    transform: translateY(80%);
+  }
+  20% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  70% {
+    opacity: 0;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
