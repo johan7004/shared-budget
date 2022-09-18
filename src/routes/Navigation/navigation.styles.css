@@ -8,4 +8,8 @@
   text-decoration: none;
   text-transform: uppercase;
   font-family: "Montserrat", sans-serif;
+}
+.navigation-container a button {
+  border: none;
+  background: none;
 }/*# sourceMappingURL=navigation.styles.css.map */

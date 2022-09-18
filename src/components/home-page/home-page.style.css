@@ -1,13 +1,34 @@
 .home-page__container {
-  position: absolute;
-  bottom: 35%;
-  right: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 40%;
+  color: white;
 }
 .home-page__container .catch-phrase__container {
   color: #ffffff;
+  text-align: right;
+  cursor: pointer;
 }
 .home-page__container .catch-phrase__item {
   display: block;
+  font-size: 52px;
+}
+.home-page__items {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.promo-cards__container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  color: black;
+}
+
+.card-container {
+  height: 9rem;
 }
 
 .lineUp {

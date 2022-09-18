@@ -1,4 +1,18 @@
 .input-forms__container {
-  max-width: 70%;
   margin-bottom: 22px;
+}
+.input-forms__container input, .input-forms__container select {
+  width: 100%;
+}
+
+p {
+  color: white;
+}
+
+.money-pot-card-container__input {
+  margin-bottom: 16px;
+}
+.money-pot-card-container__list {
+  overflow: scroll;
+  max-height: 10rem;
 }/*# sourceMappingURL=weekly-budget.css.map */

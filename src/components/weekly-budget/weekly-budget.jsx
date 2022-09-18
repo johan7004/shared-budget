@@ -1,5 +1,14 @@
 import { React, useEffect, useState } from "react";
-import { Form, Button, FloatingLabel, Row, Col } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  FloatingLabel,
+  Row,
+  Col,
+  Container,
+  Card,
+  ListGroup
+} from "react-bootstrap";
 import { updateUserBudget } from "./../../utils/firebase.config.js";
 import "./weekly-budget.css";
 import CurrencyList from "currency-list";
@@ -30,8 +39,17 @@ function WeeklyBudget() {
     window.location.href = window.location.origin;
   };
 
+const addMoneyPot =(e)=>{
+ const moneyPotName = e.target.elements.moneyPotName.value;
+ const moneyPotValue = e.target.elements.moneyPotValue.value;
+
+ console.log(moneyPotName)
+ console.log(moneyPotValue)
+}
+
   return (
-    <>
+    <Container>
+    <Row>
       <Form onSubmit={(e) => submitHandler(e)}>
         <Row className="g-2 input-forms__container">
           <Col md>
@@ -67,8 +85,7 @@ function WeeklyBudget() {
               </Form.Select>
             </FloatingLabel>
           </Col>
-        </Row>
-        <Row className="g-2 input-forms__container">
+
           <Col>
             <FloatingLabel
               controlId="floatingInputGrid"
@@ -82,11 +99,65 @@ function WeeklyBudget() {
             </FloatingLabel>
           </Col>
         </Row>
+        <Row>
+          <Col>
+            <p>Weekly Reset Date</p>
+            <p>Monthly Reset Data</p>
+          </Col>
+        </Row>
         <Button variant="primary" type="submit">
           Submit
         </Button>
       </Form>
-    </>
+      <Card
+      className="money-pot-card-container"
+      style={{ width: "18rem" }}
+    >
+      <Card.Body className="money-pot-card-container__body">
+        <Card.Title className="money-pot-card-container__title">
+          Your Money Pots
+        </Card.Title>
+        <Form onSubmit={addMoneyPot}>
+          <Form.Group
+            className="mb-3 money-pot-card-container__group"
+          >
+            <Form.Control
+              className="money-pot-card-container__input"
+              type="text"
+              name="moneyPotName"
+              placeholder="Your Money Pot Name"
+            />
+            <Form.Control
+              className="money-pot-card-container__input"
+              type="number"
+              name="moneyPotValue"
+              placeholder="Your Money Pot Target"
+            />
+          </Form.Group>
+          <Button variant="primary">Add Money Pot</Button>
+        </Form>
+        <Container className="money-pot-card-container__list">
+        <Row className="money-pot-card-container__list-row">
+        <Col>
+        <ListGroup>
+        <ListGroup.Item>Cras justo odio</ListGroup.Item>
+        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+        <ListGroup.Item>Cras justo odio</ListGroup.Item>
+        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+      </ListGroup>
+        </Col>
+        </Row>
+        </Container>
+      </Card.Body>
+    </Card>
+    </Row>
+    </Container>
   );
 }
 
