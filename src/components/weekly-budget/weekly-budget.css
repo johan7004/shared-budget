@@ -1,7 +1,8 @@
 .input-forms__container {
   margin-bottom: 22px;
 }
-.input-forms__container input, .input-forms__container select {
+.input-forms__container input,
+.input-forms__container select {
   width: 100%;
 }
 
@@ -15,4 +16,16 @@ p {
 .money-pot-card-container__list {
   overflow: scroll;
   max-height: 10rem;
+}
+.money-pot-card-container__btn {
+  margin-bottom: 16px;
+}
+
+@media only screen and (max-width: 900px) {
+  .weekly-page-container {
+    flex-direction: column;
+  }
+  .input-forms__container {
+    flex-direction: column;
+  }
 }/*# sourceMappingURL=weekly-budget.css.map */

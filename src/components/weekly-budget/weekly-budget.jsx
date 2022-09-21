@@ -2,12 +2,11 @@ import { React, useEffect, useState } from "react";
 import {
   Form,
   Button,
-  FloatingLabel,
   Row,
   Col,
   Container,
   Card,
-  ListGroup
+  ListGroup,
 } from "react-bootstrap";
 import { updateUserBudget } from "./../../utils/firebase.config.js";
 import "./weekly-budget.css";
@@ -39,124 +38,111 @@ function WeeklyBudget() {
     window.location.href = window.location.origin;
   };
 
-const addMoneyPot =(e)=>{
- const moneyPotName = e.target.elements.moneyPotName.value;
- const moneyPotValue = e.target.elements.moneyPotValue.value;
+  const addMoneyPot = (e) => {
+    const moneyPotName = e.target.elements.moneyPotName.value;
+    const moneyPotValue = e.target.elements.moneyPotValue.value;
 
- console.log(moneyPotName)
- console.log(moneyPotValue)
-}
+    console.log(moneyPotName);
+    console.log(moneyPotValue);
+  };
 
   return (
     <Container>
-    <Row>
-      <Form onSubmit={(e) => submitHandler(e)}>
-        <Row className="g-2 input-forms__container">
-          <Col md>
-            <FloatingLabel
-              controlId="floatingInputGrid"
-              label="Your Weekly Budget"
-            >
-              <Form.Control
-                type="number"
-                placeholder="Enter Your Weekly budget"
-                name="weeklyBudget"
-              />
-            </FloatingLabel>
-          </Col>
-          <Col md>
-            <FloatingLabel
-              controlId="floatingSelectGrid"
-              label="Choose Currency"
-            >
-              <Form.Select
-                aria-label="Floating label select example"
-                name="weeklyCurrency"
-              >
-                {currencyList
-                  ? Object.keys(currencyList).map((data, index) => {
-                      return (
-                        <option key={index} value={currencyList[data].code}>
-                          {currencyList[data].code}{" "}
-                        </option>
-                      );
-                    })
-                  : ""}
-              </Form.Select>
-            </FloatingLabel>
-          </Col>
-
-          <Col>
-            <FloatingLabel
-              controlId="floatingInputGrid"
-              label="Your Monthly Budget"
-            >
-              <Form.Control
-                type="number"
-                placeholder="Enter Your Weekly budget"
-                name="monthlyBudget"
-              />
-            </FloatingLabel>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <p>Weekly Reset Date</p>
-            <p>Monthly Reset Data</p>
-          </Col>
-        </Row>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-      <Card
-      className="money-pot-card-container"
-      style={{ width: "18rem" }}
-    >
-      <Card.Body className="money-pot-card-container__body">
-        <Card.Title className="money-pot-card-container__title">
-          Your Money Pots
-        </Card.Title>
-        <Form onSubmit={addMoneyPot}>
-          <Form.Group
-            className="mb-3 money-pot-card-container__group"
-          >
-            <Form.Control
-              className="money-pot-card-container__input"
-              type="text"
-              name="moneyPotName"
-              placeholder="Your Money Pot Name"
-            />
-            <Form.Control
-              className="money-pot-card-container__input"
-              type="number"
-              name="moneyPotValue"
-              placeholder="Your Money Pot Target"
-            />
-          </Form.Group>
-          <Button variant="primary">Add Money Pot</Button>
-        </Form>
-        <Container className="money-pot-card-container__list">
-        <Row className="money-pot-card-container__list-row">
+      <Row className="weekly-page-container">
         <Col>
-        <ListGroup>
-        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-      </ListGroup>
+          <Form onSubmit={(e) => submitHandler(e)}>
+            <Row className="g-2 input-forms__container">
+              <Col>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter Your Weekly budget"
+                    name="weeklyBudget"
+                  />
+
+              </Col>
+              <Col>
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    name="weeklyCurrency"
+                  >
+                    {currencyList
+                      ? Object.keys(currencyList).map((data, index) => {
+                          return (
+                            <option key={index} value={currencyList[data].code}>
+                              {currencyList[data].code}{" "}
+                            </option>
+                          );
+                        })
+                      : ""}
+                  </Form.Select>
+
+              </Col>
+
+              <Col>
+
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter Your monthly budget"
+                    name="monthlyBudget"
+                  />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <p>Weekly Reset Date</p>
+                <p>Monthly Reset Data</p>
+              </Col>
+            </Row>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
         </Col>
-        </Row>
-        </Container>
-      </Card.Body>
-    </Card>
-    </Row>
+        <Col>
+          <Card className="money-pot-card-container">
+            <Card.Body className="money-pot-card-container__body">
+              <Card.Title className="money-pot-card-container__title">
+                Your Money Pots
+              </Card.Title>
+              <Form onSubmit={addMoneyPot}>
+                <Form.Group className="mb-3 money-pot-card-container__group">
+                  <Form.Control
+                    className="money-pot-card-container__input"
+                    type="text"
+                    name="moneyPotName"
+                    placeholder="Your Money Pot Name"
+                  />
+                  <Form.Control
+                    className="money-pot-card-container__input"
+                    type="number"
+                    name="moneyPotValue"
+                    placeholder="Your Money Pot Target"
+                  />
+                </Form.Group>
+                <Button variant="primary" className="money-pot-card-container__btn">Add Money Pot</Button>
+              </Form>
+              <Container className="money-pot-card-container__list">
+                <Row className="money-pot-card-container__list-row">
+                  <Col>
+                    <ListGroup>
+                      <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                      <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                      <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                      <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                      <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                      <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                      <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                      <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                      <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                      <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                    </ListGroup>
+                  </Col>
+                </Row>
+              </Container>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </Container>
   );
 }

@@ -26,6 +26,7 @@ function App() {
         <Route index element={<Home />}></Route>
         <Route path="weekly-budget" element={<WeeklyBudgetPage />}></Route>
         <Route exact path="sign-in" element={<SignInPage />}></Route>
+        
       </Route>
     </Routes>
   );

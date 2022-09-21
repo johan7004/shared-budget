@@ -1,8 +1,9 @@
 .input-forms {
   &__container {
     margin-bottom: 22px;
-    input,select{
-        width: 100%;
+    input,
+    select {
+      width: 100%;
     }
   }
 }
@@ -14,8 +15,22 @@ p {
   &__input {
     margin-bottom: 16px;
   }
-  &__list{
+  &__list {
     overflow: scroll;
-    max-height:10rem;
+    max-height: 10rem;
+  }
+  &__btn {
+    margin-bottom: 16px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .weekly-page-container {
+    flex-direction: column;
+  }
+  .input-forms {
+    &__container {
+      flex-direction:column;
+    }
   }
 }
