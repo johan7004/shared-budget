@@ -69,21 +69,6 @@ export const addCollectionAndDocuments = async (
   await batch.commit();
 };
 
-export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(userDb, "categories");
-  const categoryquery = query(collectionRef);
-
-  const querySnapShot = await getDocs(categoryquery);
-
-  const categoryMap = querySnapShot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-
-  return categoryMap;
-};
-
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalInformation = {}
@@ -108,13 +93,15 @@ export const createUserDocumentFromAuth = async (
         email,
         phoneNumber,
         createdAt,
+        moneyPot: null,
         budget: {
-          expenses:[],
           weeklyBudget: null,
           monthlyBudget: null,
           currencyValue: null,
-    
+          weekTarget: null,
+          expenses: null,
         },
+
         ...additionalInformation,
       });
     } catch (error) {
@@ -155,8 +142,8 @@ export const updateUserBudget = async (budgetValues) => {
               weeklyBudget: weeklyBudgetValue,
               monthlyBudget: monthlyBudgetValue,
               currencyValue: currencyValue,
-              weekTarget:weekTarget,
-              expenses:[]
+              weekTarget: weekTarget,
+              expenses: null,
             },
           },
           { merge: true }
@@ -169,8 +156,6 @@ export const updateUserBudget = async (budgetValues) => {
 };
 export const updateUserExpense = async (expenseValues) => {
   if (expenseValues) {
-    
-
     const userCollection = collection(userDb, "users");
     const userId = async () => {
       if (auth.currentUser) {
@@ -179,7 +164,7 @@ export const updateUserExpense = async (expenseValues) => {
           doc(userCollection, uid),
           {
             budget: {
-             expenses: expenseValues,
+              expenses: expenseValues,
             },
           },
           { merge: true }
@@ -191,17 +176,50 @@ export const updateUserExpense = async (expenseValues) => {
   }
 };
 
-
 export const userBudgetValues = async () => {
   const userId = async () => {
     if (auth.currentUser) {
       const { uid } = await auth.currentUser;
       const docRef = doc(userDb, "users", uid);
       const docSnap = await getDoc(docRef);
-      const {budget} = docSnap.data()
+      const { budget } = docSnap.data();
 
       return budget;
+    }
+  };
 
+  return userId();
+};
+
+export const updateUserMoneyPot = async (moneyPotValues) => {
+  if (moneyPotValues) {
+    const userCollection = collection(userDb, "users");
+    const userId = async () => {
+      if (auth.currentUser) {
+        const { uid } = await auth.currentUser;
+        await setDoc(
+          doc(userCollection, uid),
+          {
+            moneyPot: moneyPotValues,
+          },
+          { merge: true }
+        );
+      }
+    };
+
+    return userId();
+  }
+};
+
+export const userMoneyPotValues = async () => {
+  const userId = async () => {
+    if (auth.currentUser) {
+      const { uid } = await auth.currentUser;
+      const docRef = doc(userDb, "users", uid);
+      const docSnap = await getDoc(docRef);
+      const { moneyPot } = docSnap.data();
+
+      return console.log(docSnap.data());
     }
   };
 

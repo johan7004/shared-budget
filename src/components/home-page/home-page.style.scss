@@ -7,6 +7,10 @@
     top:40%;
     color:white;
     
+    .card-container{
+      height:9rem;
+    }
+    
  
     .catch-phrase {
       &__container {
@@ -36,9 +40,7 @@
   }
 }
 
-.card-container{
-  height:9rem;
-}
+
 
 .lineUp {
   animation: 2s anim-lineUp ease-out;

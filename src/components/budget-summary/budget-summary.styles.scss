@@ -1,27 +1,58 @@
 .card-container {
-    color:black;
+  color: black;
 
-   button a, a{
-        text-decoration: none;
-        color:white;
-        text-transform: uppercase;
-        font-family: 'Montserrat';
-    }
+  button a,
+  a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-family: "Montserrat";
+  }
 
-    &__item {
-        min-height: 184px;
-        margin:16px auto;
-    }
-    &__body{
-        box-shadow: -5px 10px 10px #d7983d;
-    }
+  &__item {
+    min-height: 184px;
+    margin: 16px auto;
+  }
+  &__body {
+    box-shadow: -5px 10px 10px #8129d8;
+  }
 }
 
-.expense-form{
-    &__container {
-
-        &--input{
-            margin-bottom:16px;
-        }
+.expense-form {
+  &__container {
+    &--input {
+      margin-bottom: 16px;
     }
+  }
+}
+.piggy-bank {
+
+    &__container{
+        text-align: center;
+    }
+  &__item {
+    position: relative;
+
+    &-card{
+        background: none;
+        align-items:center;
+    }
+
+    img {
+      width: 250px;
+      height: auto;
+      object-fit:contain;
+    }
+  }
+  &__info {
+    position: absolute;
+    top: 40%;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    font-size:80%;
+    
+
+    
+  }
 }

@@ -12,9 +12,15 @@ import {
 } from "react-bootstrap";
 import { useContext } from "react";
 import { BudgetContext } from "../context/budget.context";
+import { MoneyPotContext } from "../context/moneyPot.context";
 import { useState, useEffect } from "react";
-import { updateUserBudget, updateUserExpense } from "./../../utils/firebase.config.js";
+import {
+  updateUserBudget,
+  updateUserExpense,
+  userMoneyPotValues
+} from "./../../utils/firebase.config.js";
 import { UserContext } from "./../context/user.context";
+import piggyBank from "./../../assets/images/piggy-bank.png";
 
 export default function BudgetSummary() {
   const [weeklyBudgetValue, setWeeklyBudget] = useState();
@@ -23,8 +29,9 @@ export default function BudgetSummary() {
   const [weekTarget, setWeekTarget] = useState();
   const [expenses, setExpenses] = useState([]);
 
-  const { budgetValues,expenseValues } = useContext(BudgetContext);
+  const { budgetValues, expenseValues } = useContext(BudgetContext);
   const { currentUser } = useContext(UserContext);
+  const { moneyPotValues, setMoneyPotValues } = useContext(MoneyPotContext);
 
   useEffect(() => {
     if (budgetValues) {
@@ -37,6 +44,18 @@ export default function BudgetSummary() {
       setExpenses(expenseValues);
     }
   }, [budgetValues, expenseValues]);
+
+  useEffect(() => {
+    if (currentUser) {
+userMoneyPotValues()
+      
+      
+
+    }
+    else{
+      console.log(`current user not true`)
+    }
+  }, [currentUser]);
 
   const submitExpenseHandler = (e) => {
     e.preventDefault();
@@ -58,6 +77,12 @@ export default function BudgetSummary() {
   }, [weeklyBudgetValue, currencyValue, monthlyBudgetValue, weekTarget]);
 
   useEffect(() => {
+    if (expenses.length) {
+      console.log("expenses");
+      updateUserExpense(expenses);
+    } else {
+      console.log(`expense not true`);
+    }
     updateUserExpense(expenses);
   }, [expenses]);
 
@@ -66,7 +91,7 @@ export default function BudgetSummary() {
       <Row>
         <Col className="card-container">
           <Card className="card-container__item" style={{ width: "18rem" }}>
-            <Card.Body className= "card-container__body">
+            <Card.Body className="card-container__body">
               <Card.Title>Your Recent Expenses</Card.Title>
 
               {expenses
@@ -86,7 +111,7 @@ export default function BudgetSummary() {
         </Col>
         <Col className="card-container">
           <Card className="card-container__item" style={{ width: "18rem" }}>
-            <Card.Body className= "card-container__body">
+            <Card.Body className="card-container__body">
               <Card.Title>Remaining Budget Funds</Card.Title>
 
               {currentUser ? (
@@ -110,7 +135,7 @@ export default function BudgetSummary() {
 
         <Col className="card-container">
           <Card className="card-container__item" style={{ width: "18rem" }}>
-            <Card.Body className= "card-container__body">
+            <Card.Body className="card-container__body">
               <Card.Title>Add Expense</Card.Title>
               <Form
                 className="expense-form__container"
@@ -134,6 +159,27 @@ export default function BudgetSummary() {
             </Card.Body>
           </Card>
         </Col>
+      </Row>
+      <Row className="piggy-bank__container">
+       {moneyPotValues? moneyPotValues.map(data =>{
+        const potName = data.name;
+        const potTarget = data.target;
+        const potCurrentValue = data.currentPotValue;
+        const potId = data.potId;
+
+        return (
+          <Col key={potId} className="piggy-bank__item">
+          <Card className="piggy-bank__item-card">
+          <img src={piggyBank} alt="piggy" />
+          <div className="piggy-bank__info">
+            <p className="piggy-bank__info-text">{potName}</p>
+            <p className="piggy-bank__info-text">{potTarget}</p>
+            <p className="piggy-bank__info-text">{potCurrentValue}</p>
+          </div>
+          </Card>
+        </Col>
+        )
+       }):''}
       </Row>
     </Container>
   );

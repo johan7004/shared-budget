@@ -6,8 +6,8 @@
   width: 100%;
 }
 
-p {
-  color: white;
+p.card-text {
+  color: black;
 }
 
 .money-pot-card-container__input {
@@ -19,6 +19,18 @@ p {
 }
 .money-pot-card-container__btn {
   margin-bottom: 16px;
+}
+
+.dates-container {
+  margin-bottom: 16px;
+}
+.dates-container__label {
+  color: white;
+  margin: 10px auto;
+}
+
+div.calendar-container {
+  width: 100%;
 }
 
 @media only screen and (max-width: 900px) {

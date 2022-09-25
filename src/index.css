@@ -6,19 +6,31 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+
+}
+html,body{
+  height: 100%;
+  width: 100%;
+}
+#root{
+  overflow: hidden;
   background:
   linear-gradient(to left top, rgb(19, 16, 82) 0%/*bottom-right color*/,  rgb(0, 0, 0) 100% /*top-left color*/),
   linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))/*"faked" black background make sure to add last or it will appear before the transparent/colored layer*/;
   background-repeat: no-repeat;
   background-size: cover;
   background-position:center;
-
-}
-#root{
-  overflow: hidden;
+  box-sizing: border-box;
+  min-height:100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button.btn-primary {
+
+  background-color: #4a078c;
 }

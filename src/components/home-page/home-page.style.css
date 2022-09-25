@@ -6,6 +6,9 @@
   top: 40%;
   color: white;
 }
+.home-page__container .card-container {
+  height: 9rem;
+}
 .home-page__container .catch-phrase__container {
   color: #ffffff;
   text-align: right;
@@ -25,10 +28,6 @@
   width: 100%;
   justify-content: space-between;
   color: black;
-}
-
-.card-container {
-  height: 9rem;
 }
 
 .lineUp {

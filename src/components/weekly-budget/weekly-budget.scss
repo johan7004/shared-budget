@@ -7,8 +7,8 @@
     }
   }
 }
-p {
-  color: white;
+p.card-text {
+  color: black;
 }
 
 .money-pot-card-container {
@@ -24,13 +24,26 @@ p {
   }
 }
 
+.dates-container {
+  margin-bottom: 16px;
+
+  &__label {
+    color: white;
+    margin: 10px auto;
+  }
+}
+
+div.calendar-container {
+  width: 100%;
+}
+
 @media only screen and (max-width: 900px) {
   .weekly-page-container {
     flex-direction: column;
   }
   .input-forms {
     &__container {
-      flex-direction:column;
+      flex-direction: column;
     }
   }
 }
