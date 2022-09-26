@@ -77,14 +77,16 @@ userMoneyPotValues()
   }, [weeklyBudgetValue, currencyValue, monthlyBudgetValue, weekTarget]);
 
   useEffect(() => {
-    if (expenses.length) {
+    if(currentUser){
+    if (!expenses) {
       console.log("expenses");
-      updateUserExpense(expenses);
     } else {
+      updateUserExpense(expenses);
       console.log(`expense not true`);
     }
-    updateUserExpense(expenses);
-  }, [expenses]);
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container className="summary-container">

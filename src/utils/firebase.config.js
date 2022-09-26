@@ -145,6 +145,7 @@ export const updateUserBudget = async (budgetValues) => {
               weekTarget: weekTarget,
               expenses: null,
             },
+            
           },
           { merge: true }
         );
@@ -155,6 +156,7 @@ export const updateUserBudget = async (budgetValues) => {
   }
 };
 export const updateUserExpense = async (expenseValues) => {
+ 
   if (expenseValues) {
     const userCollection = collection(userDb, "users");
     const userId = async () => {
@@ -166,6 +168,7 @@ export const updateUserExpense = async (expenseValues) => {
             budget: {
               expenses: expenseValues,
             },
+            
           },
           { merge: true }
         );
@@ -219,7 +222,7 @@ export const userMoneyPotValues = async () => {
       const docSnap = await getDoc(docRef);
       const { moneyPot } = docSnap.data();
 
-      return console.log(docSnap.data());
+      return moneyPot;
     }
   };
 

@@ -8,7 +8,7 @@ import SignInPage from "./routes/sign-in/sign-in-page.component";
 import { UserContext } from "./components/context/user.context.jsx";
 import { BudgetContext } from "./components/context/budget.context.jsx";
 import {MoneyPotContext} from './components/context/moneyPot.context';
-import { userBudgetValues, userMoneyPotValues } from './utils/firebase.config';
+import { userBudgetValues} from './utils/firebase.config';
 
 function App() {
   const { currentUser } = useContext(UserContext);
@@ -18,13 +18,7 @@ function App() {
   useEffect(() => {
     if (currentUser) {
       userBudgetValues().then((result) => setBudgetValues(result));
-      userBudgetValues().then((result) => setExpenseValues(result.expenses));
-      const userPot = async()=>{
-        const result = await userMoneyPotValues();
-
-        console.log(result);
-      }
-      userPot();
+     // userBudgetValues().then((result) => setExpenseValues(result.expenses));
 
     }
   }, [currentUser, setBudgetValues, setExpenseValues, setMoneyPotValues]);

@@ -19,7 +19,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { UserContext } from "./../context/user.context";
 
-import {MoneyPotContext} from './../context/moneyPot.context'
+import { MoneyPotContext } from "./../context/moneyPot.context";
 
 function WeeklyBudget() {
   const [currencyList, setCurrencyList] = useState();
@@ -27,7 +27,7 @@ function WeeklyBudget() {
   const [weeklyResetDate, setWeeklyResetDate] = useState(new Date());
   const [monthlyResetDate, setMonthlyResetDate] = useState(new Date());
   const { currentUser } = useContext(UserContext);
-  const {setMoneyPotValues} = useContext(MoneyPotContext);
+  const { setMoneyPotValues } = useContext(MoneyPotContext);
 
   useEffect(() => {
     setCurrencyList(CurrencyList.getAll("en_GB"));
@@ -71,30 +71,42 @@ function WeeklyBudget() {
         potId: code,
         currentPotValue: 0,
       },
+      
     ]);
+    updateUserMoneyPot(moneyPot);
   };
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     if (moneyPot) {
+  //       updateUserMoneyPot(moneyPot);
+  //     } else {
+  //       setMoneyPotValues(moneyPot);
+  //       console.log(`sideEffect`);
+  //     }
+  //   }
+  // }, [currentUser, moneyPot, setMoneyPotValues]);
+
+  console.log("----------");
+  console.log(moneyPot);
+  
+  console.log("-----------------");
+
   useEffect(() => {
-    if (moneyPot.length > 0) {
-      updateUserMoneyPot(moneyPot);
-      setMoneyPotValues(moneyPot);
-      console.log(`sideEffect`);
-    } else {
-      console.log(`123`);
-    }
-  }, [moneyPot, setMoneyPotValues]);
+    updateUserMoneyPot(moneyPot)
+  },[moneyPot]);
 
   useEffect(() => {
     if (currentUser) {
-
-      const moneyPotFromFirebase= async ()=>{
-        const result = await userMoneyPotValues()
+      const moneyPotFromFirebase = async () => {
+        const result = await userMoneyPotValues();
+        console.log("<<<<<>>>>>");
+        console.log(result);
         setMoneyPot(result)
       };
       moneyPotFromFirebase();
-      
-    }else {
-      return;
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
   const removePot = (e, id) => {
@@ -113,6 +125,7 @@ function WeeklyBudget() {
   const monthlyDataReset = (nextValue) => {
     setMonthlyResetDate(nextValue);
   };
+
 
   return (
     <Container>
