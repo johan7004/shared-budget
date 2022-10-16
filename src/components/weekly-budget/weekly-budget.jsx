@@ -1,4 +1,4 @@
-import { React, useEffect, useState, useContext } from "react";
+import { React, useEffect, useState, useContext, useRef } from "react";
 import {
   Form,
   Button,
@@ -28,6 +28,7 @@ function WeeklyBudget() {
   const [monthlyResetDate, setMonthlyResetDate] = useState(new Date());
   const { currentUser } = useContext(UserContext);
   const { setMoneyPotValues } = useContext(MoneyPotContext);
+  let initialRender = useRef(true);
 
   useEffect(() => {
     setCurrencyList(CurrencyList.getAll("en_GB"));
@@ -48,6 +49,7 @@ function WeeklyBudget() {
       weekTarget,
     };
     updateUserBudget(userBudget);
+
     //window.location.href = window.location.origin;
   };
 
@@ -71,10 +73,9 @@ function WeeklyBudget() {
         potId: code,
         currentPotValue: 0,
       },
-      
     ]);
-    updateUserMoneyPot(moneyPot);
   };
+
   // useEffect(() => {
   //   if (currentUser) {
   //     if (moneyPot) {
@@ -86,22 +87,21 @@ function WeeklyBudget() {
   //   }
   // }, [currentUser, moneyPot, setMoneyPotValues]);
 
-  console.log("----------");
-  console.log(moneyPot);
-  
-  console.log("-----------------");
-
   useEffect(() => {
-    updateUserMoneyPot(moneyPot)
-  },[moneyPot]);
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      console.log(`Side effects of money pot on load`);
+      updateUserMoneyPot(moneyPot);
+      setMoneyPotValues(moneyPot);
+    }
+  }, [moneyPot, setMoneyPotValues]);
 
   useEffect(() => {
     if (currentUser) {
       const moneyPotFromFirebase = async () => {
         const result = await userMoneyPotValues();
-        console.log("<<<<<>>>>>");
-        console.log(result);
-        setMoneyPot(result)
+        setMoneyPot(result);
       };
       moneyPotFromFirebase();
     }
@@ -126,11 +126,10 @@ function WeeklyBudget() {
     setMonthlyResetDate(nextValue);
   };
 
-
   return (
     <Container>
       <Row className="weekly-page-container">
-        <Col>
+        <Col className="weekly-page-container__form">
           <Form onSubmit={(e) => submitHandler(e)}>
             <Row className="g-2 input-forms__container">
               <Col>
@@ -138,12 +137,14 @@ function WeeklyBudget() {
                   type="number"
                   placeholder="Weekly budget"
                   name="weeklyBudget"
+                  required="required"
                 />
               </Col>
               <Col>
                 <Form.Select
                   aria-label="Floating label select example"
                   name="weeklyCurrency"
+                  required="required"
                 >
                   {currencyList
                     ? Object.keys(currencyList).map((data, index) => {
@@ -162,6 +163,7 @@ function WeeklyBudget() {
                   type="number"
                   placeholder="monthly budget"
                   name="monthlyBudget"
+                  required="required"
                 />
               </Col>
             </Row>
@@ -203,12 +205,14 @@ function WeeklyBudget() {
                     type="text"
                     name="moneyPotName"
                     placeholder="Your Money Pot Name"
+                    required="required"
                   />
                   <Form.Control
                     className="money-pot-card-container__input"
                     type="number"
                     name="moneyPotValue"
                     placeholder="Your Money Pot Target"
+                    required="required"
                   />
                 </Form.Group>
                 <Button

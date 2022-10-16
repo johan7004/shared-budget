@@ -13,8 +13,6 @@ export const MoneyPotProvider = ({ children }) => {
     setMoneyPotValues,
   };
 
-  console.log(moneyPotValues);
-
   return (
     <MoneyPotContext.Provider value={values}>
       {children}

@@ -93,13 +93,13 @@ export const createUserDocumentFromAuth = async (
         email,
         phoneNumber,
         createdAt,
-        moneyPot: null,
+        moneyPot: [],
         budget: {
           weeklyBudget: null,
           monthlyBudget: null,
           currencyValue: null,
           weekTarget: null,
-          expenses: null,
+          expenses: [],
         },
 
         ...additionalInformation,
@@ -143,7 +143,7 @@ export const updateUserBudget = async (budgetValues) => {
               monthlyBudget: monthlyBudgetValue,
               currencyValue: currencyValue,
               weekTarget: weekTarget,
-              expenses: null,
+              expenses: [],
             },
             
           },

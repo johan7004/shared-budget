@@ -29,6 +29,7 @@
 .piggy-bank__item-card {
   background: none;
   align-items: center;
+  border: none;
 }
 .piggy-bank__item img {
   width: 250px;

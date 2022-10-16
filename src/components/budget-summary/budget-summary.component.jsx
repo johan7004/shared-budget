@@ -1,4 +1,4 @@
-import { React, Fragment } from "react";
+import { React, Fragment, useRef } from "react";
 import "./budget-summary.styles.css";
 import { Link } from "react-router-dom";
 import {
@@ -17,7 +17,7 @@ import { useState, useEffect } from "react";
 import {
   updateUserBudget,
   updateUserExpense,
-  userMoneyPotValues
+  userMoneyPotValues,
 } from "./../../utils/firebase.config.js";
 import { UserContext } from "./../context/user.context";
 import piggyBank from "./../../assets/images/piggy-bank.png";
@@ -33,6 +33,8 @@ export default function BudgetSummary() {
   const { currentUser } = useContext(UserContext);
   const { moneyPotValues, setMoneyPotValues } = useContext(MoneyPotContext);
 
+  const initialRender = useRef(true);
+
   useEffect(() => {
     if (budgetValues) {
       const { weeklyBudget, monthlyBudget, currencyValue, weekTarget } =
@@ -45,17 +47,6 @@ export default function BudgetSummary() {
     }
   }, [budgetValues, expenseValues]);
 
-  useEffect(() => {
-    if (currentUser) {
-userMoneyPotValues()
-      
-      
-
-    }
-    else{
-      console.log(`current user not true`)
-    }
-  }, [currentUser]);
 
   const submitExpenseHandler = (e) => {
     e.preventDefault();
@@ -77,16 +68,15 @@ userMoneyPotValues()
   }, [weeklyBudgetValue, currencyValue, monthlyBudgetValue, weekTarget]);
 
   useEffect(() => {
-    if(currentUser){
-    if (!expenses) {
-      console.log("expenses");
+    if (initialRender.current) {
+      initialRender.current = false;
     } else {
       updateUserExpense(expenses);
-      console.log(`expense not true`);
+      console.log(`expense side effects`);
     }
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [expenses]);
+
+  console.log(expenses);
 
   return (
     <Container className="summary-container">
@@ -163,25 +153,27 @@ userMoneyPotValues()
         </Col>
       </Row>
       <Row className="piggy-bank__container">
-       {moneyPotValues? moneyPotValues.map(data =>{
-        const potName = data.name;
-        const potTarget = data.target;
-        const potCurrentValue = data.currentPotValue;
-        const potId = data.potId;
+        {moneyPotValues
+          ? moneyPotValues.map((data) => {
+              const potName = data.name;
+              const potTarget = data.target;
+              const potCurrentValue = data.currentPotValue;
+              const potId = data.potId;
 
-        return (
-          <Col key={potId} className="piggy-bank__item">
-          <Card className="piggy-bank__item-card">
-          <img src={piggyBank} alt="piggy" />
-          <div className="piggy-bank__info">
-            <p className="piggy-bank__info-text">{potName}</p>
-            <p className="piggy-bank__info-text">{potTarget}</p>
-            <p className="piggy-bank__info-text">{potCurrentValue}</p>
-          </div>
-          </Card>
-        </Col>
-        )
-       }):''}
+              return (
+                <Col key={potId} className="piggy-bank__item">
+                  <Card className="piggy-bank__item-card">
+                    <img src={piggyBank} alt="piggy" />
+                    <div className="piggy-bank__info">
+                      <p className="piggy-bank__info-text">{potName}</p>
+                      <p className="piggy-bank__info-text">{potTarget}</p>
+                      <p className="piggy-bank__info-text">{potCurrentValue}</p>
+                    </div>
+                  </Card>
+                </Col>
+              );
+            })
+          : ""}
       </Row>
     </Container>
   );

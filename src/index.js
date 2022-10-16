@@ -10,7 +10,7 @@ import { MoneyPotProvider } from "./components/context/moneyPot.context.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <UserProvider>
       <BudgetProvider>
         <MoneyPotProvider>
@@ -20,7 +20,7 @@ root.render(
         </MoneyPotProvider>
       </BudgetProvider>
     </UserProvider>
-  </React.StrictMode>
+  //</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
