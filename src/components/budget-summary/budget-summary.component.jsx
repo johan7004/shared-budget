@@ -9,7 +9,6 @@ import {
   Button,
   Form,
   FloatingLabel,
-  Dropdown,
 } from "react-bootstrap";
 import { useContext } from "react";
 import { BudgetContext } from "../context/budget.context";
@@ -29,6 +28,7 @@ export default function BudgetSummary() {
   const [currencyValue, setCurrencyValue] = useState();
   const [weekTarget, setWeekTarget] = useState();
   const [expenses, setExpenses] = useState([]);
+  const [selectedExpenseCategory, setSelectedExpenseCategory] = useState("MISC");
 
   const { budgetValues, expenseValues } = useContext(BudgetContext);
   const { currentUser } = useContext(UserContext);
@@ -36,6 +36,16 @@ export default function BudgetSummary() {
 
   const initialRender = useRef(true);
 
+  const expenseCategories = [
+    "Groceries",
+    "Bills",
+    "Entertainment",
+    "Restaurants",
+    "Snacks",
+    "Rent",
+    "Transport",
+    "Public Transport",
+  ];
   useEffect(() => {
     if (budgetValues) {
       const { weeklyBudget, monthlyBudget, currencyValue, weekTarget } =
@@ -52,9 +62,16 @@ export default function BudgetSummary() {
     e.preventDefault();
     const userExpense = e.target.elements.userExpense.value;
 
+
     setWeeklyBudget(weeklyBudgetValue - userExpense);
     setMonthlyBudget(monthlyBudgetValue - userExpense);
-    setExpenses((expenses) => [...expenses, userExpense]);
+    setExpenses((expenses) => [...expenses, {expense:userExpense,category:selectedExpenseCategory}]);
+  };
+
+  const userExpenseCategoryHandler = (e) => {
+    e.preventDefault();
+    const selectedValue = e.target.value;
+    setSelectedExpenseCategory(selectedValue);
   };
 
   useEffect(() => {
@@ -72,11 +89,9 @@ export default function BudgetSummary() {
       initialRender.current = false;
     } else {
       updateUserExpense(expenses);
-      console.log(`expense side effects`);
+      
     }
   }, [expenses]);
-
-  console.log(expenses);
 
   return (
     <Container className="summary-container">
@@ -88,10 +103,13 @@ export default function BudgetSummary() {
 
               {expenses
                 ? expenses.slice(-2).map((data, index) => {
+
+                  const userExpenseValue = data.expense;
+                  const userExpenseCategory = data.category
                     return (
-                      <Card.Text key={index}>
-                        Spent: {data} {currencyValue}
-                      </Card.Text>
+                       <Card.Text key={index}>
+                         Spent: {userExpenseValue} {userExpenseCategory}
+                       </Card.Text>
                     );
                   })
                 : ""}
@@ -142,25 +160,22 @@ export default function BudgetSummary() {
                     type="number"
                     placeholder="Enter Your Weekly budget"
                     name="userExpense"
+                    required="required"
                   />
                 </FloatingLabel>
-                <Dropdown className = "expense-form__container-dropdown">
-                  <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                    Expense Category
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Dropdown.Item>Groceries</Dropdown.Item>
-                    <Dropdown.Item>Entertainments</Dropdown.Item>
-                    <Dropdown.Item>Restaurant</Dropdown.Item>
-                    <Dropdown.Item>Snacks</Dropdown.Item>
-                    <Dropdown.Item>Travel</Dropdown.Item>
-                    <Dropdown.Item>Public Transport</Dropdown.Item>
-                    <Dropdown.Item>Bills</Dropdown.Item>
-                    <Dropdown.Item>Rent</Dropdown.Item>
-                    <Dropdown.Item>Misc</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                <Form.Select
+                  className="expense-form__container-select"
+                  aria-label="Default select example"
+                  onChange={userExpenseCategoryHandler}
+                >
+                  {expenseCategories.map((category, index) => {
+                    return (
+                      <option key={index} value={category}>
+                        {category}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
                 <Button variant="primary" type="submit">
                   Add Expense
                 </Button>

@@ -23,35 +23,10 @@
     &--input {
       margin-bottom: 16px;
     }
-    &-dropdown {
+    &-select{
       margin-bottom: 16px;
-      button {
-        width: 100%;
-      }
-
-      .dropdown-menu {
-        &.show {
-          max-height: 150px;
-          overflow-y: scroll;
-          &::-webkit-scrollbar {
-            width: 6px;
-            
-          }
-
-          &::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-          }
-          
-          &::-webkit-scrollbar-thumb {
-            background: #888; 
-          }
-          
-          .dropdown-item{
-            color: black;
-          }
-        }
-      }
     }
+    
   }
 }
 .piggy-bank {
