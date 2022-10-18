@@ -131,7 +131,6 @@ export const updateUserBudget = async (budgetValues) => {
     const { currencyValue, weeklyBudgetValue, monthlyBudgetValue, weekTarget } =
       budgetValues;
 
-      console.log(`${weeklyBudgetValue} the weeky budget value` )
 
     const userCollection = collection(userDb, "users");
     const userId = async () => {

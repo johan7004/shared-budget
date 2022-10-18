@@ -76,23 +76,21 @@ function WeeklyBudget() {
     ]);
   };
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     if (moneyPot) {
-  //       updateUserMoneyPot(moneyPot);
-  //     } else {
-  //       setMoneyPotValues(moneyPot);
-  //       console.log(`sideEffect`);
-  //     }
-  //   }
-  // }, [currentUser, moneyPot, setMoneyPotValues]);
+  useEffect(() => {
+    if (currentUser) {
+      if (!moneyPot && initialRender.current) {
+        //updateUserMoneyPot(moneyPot);
+        setMoneyPotValues(moneyPot);
+        return;
+      } 
+    }
+  }, [currentUser, moneyPot, setMoneyPotValues]);
 
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
     } else {
-      console.log(`Side effects of money pot on load`);
-      updateUserMoneyPot(moneyPot);
+     updateUserMoneyPot(moneyPot);
       setMoneyPotValues(moneyPot);
     }
   }, [moneyPot, setMoneyPotValues]);

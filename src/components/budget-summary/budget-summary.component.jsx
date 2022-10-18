@@ -65,7 +65,7 @@ export default function BudgetSummary() {
 
     setWeeklyBudget(weeklyBudgetValue - userExpense);
     setMonthlyBudget(monthlyBudgetValue - userExpense);
-    setExpenses((expenses) => [...expenses, {expense:userExpense,category:selectedExpenseCategory}]);
+    setExpenses((expenses) => [...expenses, {expense:userExpense,category:selectedExpenseCategory, timeStamp:new Date().toDateString()}]);
   };
 
   const userExpenseCategoryHandler = (e) => {
@@ -106,9 +106,10 @@ export default function BudgetSummary() {
 
                   const userExpenseValue = data.expense;
                   const userExpenseCategory = data.category
+                  const userExpenseTimeStamp = data.timeStamp;
                     return (
                        <Card.Text key={index}>
-                         Spent: {userExpenseValue} {userExpenseCategory}
+                         Spent: {userExpenseValue} {userExpenseCategory} {userExpenseTimeStamp}
                        </Card.Text>
                     );
                   })
