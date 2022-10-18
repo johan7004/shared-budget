@@ -9,6 +9,7 @@ import {
   Button,
   Form,
   FloatingLabel,
+  Dropdown,
 } from "react-bootstrap";
 import { useContext } from "react";
 import { BudgetContext } from "../context/budget.context";
@@ -46,7 +47,6 @@ export default function BudgetSummary() {
       setExpenses(expenseValues);
     }
   }, [budgetValues, expenseValues]);
-
 
   const submitExpenseHandler = (e) => {
     e.preventDefault();
@@ -144,6 +144,23 @@ export default function BudgetSummary() {
                     name="userExpense"
                   />
                 </FloatingLabel>
+                <Dropdown className = "expense-form__container-dropdown">
+                  <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                    Expense Category
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item>Groceries</Dropdown.Item>
+                    <Dropdown.Item>Entertainments</Dropdown.Item>
+                    <Dropdown.Item>Restaurant</Dropdown.Item>
+                    <Dropdown.Item>Snacks</Dropdown.Item>
+                    <Dropdown.Item>Travel</Dropdown.Item>
+                    <Dropdown.Item>Public Transport</Dropdown.Item>
+                    <Dropdown.Item>Bills</Dropdown.Item>
+                    <Dropdown.Item>Rent</Dropdown.Item>
+                    <Dropdown.Item>Misc</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
                 <Button variant="primary" type="submit">
                   Add Expense
                 </Button>

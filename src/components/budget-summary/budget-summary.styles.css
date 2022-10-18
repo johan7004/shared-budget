@@ -19,6 +19,28 @@
 .expense-form__container--input {
   margin-bottom: 16px;
 }
+.expense-form__container-dropdown {
+  margin-bottom: 16px;
+}
+.expense-form__container-dropdown button {
+  width: 100%;
+}
+.expense-form__container-dropdown .dropdown-menu.show {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+.expense-form__container-dropdown .dropdown-menu.show::-webkit-scrollbar {
+  width: 6px;
+}
+.expense-form__container-dropdown .dropdown-menu.show::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.expense-form__container-dropdown .dropdown-menu.show::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.expense-form__container-dropdown .dropdown-menu.show .dropdown-item {
+  color: black;
+}
 
 .piggy-bank__container {
   text-align: center;

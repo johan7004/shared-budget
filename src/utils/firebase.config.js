@@ -27,13 +27,13 @@ import {
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDyvkoC5GmGwtze6_1Afca5g7oFtiBOAvk",
-  authDomain: "shared-budget-home.firebaseapp.com",
-  projectId: "shared-budget-home",
-  storageBucket: "shared-budget-home.appspot.com",
-  messagingSenderId: "312805157700",
-  appId: "1:312805157700:web:9a2f04e7d8154c45568511",
-  measurementId: "G-K3ZH0J2MT5",
+  apiKey: "AIzaSyCKVd284ifv2-DWJR1gBnB8Okn4j-hQcoA",
+  authDomain: "shared-budget-test-db.firebaseapp.com",
+  projectId: "shared-budget-test-db",
+  storageBucket: "shared-budget-test-db.appspot.com",
+  messagingSenderId: "477197999994",
+  appId: "1:477197999994:web:c980df501139e7dc61c0c3",
+  measurementId: "G-JDYRBEVPQH"
 };
 
 // Initialize Firebase
@@ -131,9 +131,11 @@ export const updateUserBudget = async (budgetValues) => {
     const { currencyValue, weeklyBudgetValue, monthlyBudgetValue, weekTarget } =
       budgetValues;
 
+      console.log(`${weeklyBudgetValue} the weeky budget value` )
+
     const userCollection = collection(userDb, "users");
     const userId = async () => {
-      if (auth.currentUser) {
+      if (auth.currentUser && weeklyBudgetValue) {
         const { uid } = await auth.currentUser;
         await setDoc(
           doc(userCollection, uid),

@@ -23,26 +23,54 @@
     &--input {
       margin-bottom: 16px;
     }
+    &-dropdown {
+      margin-bottom: 16px;
+      button {
+        width: 100%;
+      }
+
+      .dropdown-menu {
+        &.show {
+          max-height: 150px;
+          overflow-y: scroll;
+          &::-webkit-scrollbar {
+            width: 6px;
+            
+          }
+
+          &::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+          }
+          
+          &::-webkit-scrollbar-thumb {
+            background: #888; 
+          }
+          
+          .dropdown-item{
+            color: black;
+          }
+        }
+      }
+    }
   }
 }
 .piggy-bank {
-
-    &__container{
-        text-align: center;
-    }
+  &__container {
+    text-align: center;
+  }
   &__item {
     position: relative;
 
-    &-card{
-        background: none;
-        align-items:center;
-        border:none;
+    &-card {
+      background: none;
+      align-items: center;
+      border: none;
     }
 
     img {
       width: 250px;
       height: auto;
-      object-fit:contain;
+      object-fit: contain;
     }
   }
   &__info {
@@ -51,9 +79,6 @@
     font-weight: 700;
     color: white;
     text-align: center;
-    font-size:80%;
-    
-
-    
+    font-size: 80%;
   }
 }
