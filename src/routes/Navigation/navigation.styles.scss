@@ -1,11 +1,16 @@
 .navigation-container{
-    background-color: #8BC6EC;
-    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+    background-color: #4a078c !important;
     border-bottom: 1px solid #000000;
     a{
         color:#ffffff;
         text-decoration: none;
         text-transform: uppercase;
         font-family:  'Montserrat', sans-serif;
+
+        button{
+            border:none;
+            background:none;
+            color:white;
+        }
     }
 }

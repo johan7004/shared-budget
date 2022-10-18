@@ -1,8 +1,54 @@
-.input-forms{
-
-    &__container{
-        max-width: 70%;
-        margin-bottom:22px;
+.weekly-page-container{
+  &__form{
+    margin-bottom:16px;
+  }
+}
+.input-forms {
+  &__container {
+    margin-bottom: 22px;
+    input,
+    select {
+      width: 100%;
     }
+  }
+}
+p.card-text {
+  color: black;
+}
 
+.money-pot-card-container {
+  &__input {
+    margin-bottom: 16px;
+  }
+  &__list {
+    overflow: scroll;
+    max-height: 10rem;
+  }
+  &__btn {
+    margin-bottom: 16px;
+  }
+}
+
+.dates-container {
+  margin-bottom: 16px;
+
+  &__label {
+    color: white;
+    margin: 10px auto;
+  }
+}
+
+div.calendar-container {
+  width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  .weekly-page-container {
+    flex-direction: column;
+  }
+  .input-forms {
+    &__container {
+      flex-direction: column;
+    }
+  }
 }

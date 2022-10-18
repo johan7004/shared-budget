@@ -1,0 +1,77 @@
+.home-page {
+  &__container {
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    position: fixed;
+    top:40%;
+    color:white;
+    
+    .card-container{
+      height:9rem;
+    }
+    
+ 
+    .catch-phrase {
+      &__container {
+        color: #ffffff;
+        text-align:right;
+        cursor: pointer;
+      }
+      &__item {
+        display: block;
+        font-size:52px;
+      }
+    }
+  }
+  &__items{
+    
+    width:100%;
+    justify-content:space-between;
+  }
+}
+
+.promo-cards{
+  &__container {
+    display:flex;
+    width:100%;
+    justify-content:space-between;
+    color:black;
+  }
+}
+
+
+
+.lineUp {
+  animation: 2s anim-lineUp ease-out;
+  &--second {
+    animation: 2.5s anim-lineUp ease-out;
+  }
+  &--second {
+    animation: 3s anim-lineUp ease-out;
+  }
+  &--third {
+    animation: 3.5s anim-lineUp ease-out;
+  }
+}
+@keyframes anim-lineUp {
+  0% {
+    opacity: 0;
+    transform: translateY(80%);
+  }
+  20% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  70% {
+    opacity: 0;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}

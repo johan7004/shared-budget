@@ -6,18 +6,21 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./components/context/user.context.jsx";
 import { BudgetProvider } from "./components/context/budget.context.jsx";
+import { MoneyPotProvider } from "./components/context/moneyPot.context.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <UserProvider>
       <BudgetProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <MoneyPotProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </MoneyPotProvider>
       </BudgetProvider>
     </UserProvider>
-  </React.StrictMode>
+  //</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

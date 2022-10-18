@@ -1,4 +1,47 @@
+.weekly-page-container__form {
+  margin-bottom: 16px;
+}
+
 .input-forms__container {
-  max-width: 70%;
   margin-bottom: 22px;
+}
+.input-forms__container input,
+.input-forms__container select {
+  width: 100%;
+}
+
+p.card-text {
+  color: black;
+}
+
+.money-pot-card-container__input {
+  margin-bottom: 16px;
+}
+.money-pot-card-container__list {
+  overflow: scroll;
+  max-height: 10rem;
+}
+.money-pot-card-container__btn {
+  margin-bottom: 16px;
+}
+
+.dates-container {
+  margin-bottom: 16px;
+}
+.dates-container__label {
+  color: white;
+  margin: 10px auto;
+}
+
+div.calendar-container {
+  width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  .weekly-page-container {
+    flex-direction: column;
+  }
+  .input-forms__container {
+    flex-direction: column;
+  }
 }/*# sourceMappingURL=weekly-budget.css.map */
