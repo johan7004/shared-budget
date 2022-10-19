@@ -17,7 +17,6 @@ import { useState, useEffect } from "react";
 import {
   updateUserBudget,
   updateUserExpense,
-  userMoneyPotValues,
 } from "./../../utils/firebase.config.js";
 import { UserContext } from "./../context/user.context";
 import piggyBank from "./../../assets/images/piggy-bank.png";
@@ -32,7 +31,7 @@ export default function BudgetSummary() {
 
   const { budgetValues, expenseValues } = useContext(BudgetContext);
   const { currentUser } = useContext(UserContext);
-  const { moneyPotValues, setMoneyPotValues } = useContext(MoneyPotContext);
+  const { moneyPotValues } = useContext(MoneyPotContext);
 
   const initialRender = useRef(true);
 
