@@ -143,19 +143,18 @@ export default function BudgetSummary() {
     const potCurrentValue = +currentValue;
 
     if (userInputValue >= potTargetValue) {
-      console.log(`100% is reached ${userInputValue + potCurrentValue}`);
+
       setNewPotValue(userInputValue + potCurrentValue);
     } else {
       setNewPotValue(userInputValue + potCurrentValue);
-      console.log(`target not reached ${userInputValue + potCurrentValue}`);
+
     }
   };
-  console.log(newPotValue);
+
 
   const moneyDropHandler = (e, potData) => {
     e.preventDefault();
-    console.log(potData);
-    console.log(moneyPotValues);
+  
 
     const userTarget = potData.potTarget;
     const userPotCurrentValue = potData.newPotValue;
@@ -167,15 +166,13 @@ export default function BudgetSummary() {
 
         moneyPotValues[potIndex].currentPotValue = potData.newPotValue;
 
-        console.log(
-          `$ avaialbe balance ${availableBalanceValue - potData.newPotValue}`
-        );
+        
         setAvailableBalance(availableBalanceValue - potData.newPotValue);
 
         setMoneyPotValues(moneyPotValues);
         updateUserExpense(expenses);
         updateUserMoneyPot(moneyPotValues);
-        console.log(expenses)
+        
         setShowToast(false);
         setNewPotValue(0); // to reset the values not to affect other Pot's progress bar
       } else {
