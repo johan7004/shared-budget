@@ -97,6 +97,8 @@ export const createUserDocumentFromAuth = async (
           monthlyBudget: null,
           currencyValue: null,
           weekTarget: null,
+          totalBalanceValue: null,
+          availableBalanceValue: null,
           expenses: [],
         },
 
@@ -126,13 +128,18 @@ export const onAuthStateChangedListener = (callback) =>
 
 export const updateUserBudget = async (budgetValues) => {
   if (budgetValues) {
-    const { currencyValue, weeklyBudgetValue, monthlyBudgetValue, weekTarget } =
-      budgetValues;
-
+    const {
+      currencyValue,
+      weeklyBudgetValue,
+      monthlyBudgetValue,
+      weekTarget,
+      totalBalanceValue,
+      availableBalanceValue,
+    } = budgetValues;
 
     const userCollection = collection(userDb, "users");
     const userId = async () => {
-      if (auth.currentUser && weeklyBudgetValue) {
+      if (auth.currentUser && weeklyBudgetValue && totalBalanceValue) {
         const { uid } = await auth.currentUser;
         await setDoc(
           doc(userCollection, uid),
@@ -142,9 +149,10 @@ export const updateUserBudget = async (budgetValues) => {
               monthlyBudget: monthlyBudgetValue,
               currencyValue: currencyValue,
               weekTarget: weekTarget,
+              totalBalanceValue: totalBalanceValue,
+              availableBalanceValue: availableBalanceValue,
               expenses: [],
             },
-            
           },
           { merge: true }
         );
@@ -155,7 +163,6 @@ export const updateUserBudget = async (budgetValues) => {
   }
 };
 export const updateUserExpense = async (expenseValues) => {
- 
   if (expenseValues) {
     const userCollection = collection(userDb, "users");
     const userId = async () => {
@@ -167,7 +174,6 @@ export const updateUserExpense = async (expenseValues) => {
             budget: {
               expenses: expenseValues,
             },
-            
           },
           { merge: true }
         );
@@ -212,6 +218,51 @@ export const updateUserMoneyPot = async (moneyPotValues) => {
     return userId();
   }
 };
+export const updateUserAvailableBalance = async (availableBalanceValue) => {
+  if (availableBalanceValue) {
+    const userCollection = collection(userDb, "users");
+    const userId = async () => {
+      if (auth.currentUser) {
+        const { uid } = await auth.currentUser;
+        await setDoc(
+          doc(userCollection, uid),
+          {
+            budget:{
+
+              availableBalanceValue: availableBalanceValue,
+            }
+          },
+          { merge: true }
+        );
+      }
+    };
+
+    return userId();
+  }
+};
+export const updateUserTotalBalance = async (totalBalanceValue) => {
+  if (totalBalanceValue) {
+    const userCollection = collection(userDb, "users");
+    const userId = async () => {
+      if (auth.currentUser) {
+        const { uid } = await auth.currentUser;
+        await setDoc(
+          doc(userCollection, uid),
+          {
+            budget:{
+
+              totalBalanceValue: totalBalanceValue,
+            }
+          },
+          { merge: true }
+        );
+      }
+    };
+
+    return userId();
+  }
+};
+
 
 export const userMoneyPotValues = async () => {
   const userId = async () => {
