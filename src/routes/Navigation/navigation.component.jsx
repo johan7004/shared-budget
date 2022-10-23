@@ -30,13 +30,13 @@ export default function NavigationBar() {
                 ""
               )}
 
-              <Nav.Link as={Link} to="sign-in">
+              
                 {currentUser ? (
-                  <button onClick={signOutHandle}> SIGN OUT</button>
+                 <Nav.Link as={Link} to="/" > <button onClick={signOutHandle}> SIGN OUT</button></Nav.Link>
                 ) : (
-                  "SIGN UP"
+                  <Nav.Link as={Link} to="sign-in">SIGN UP</Nav.Link>
                 )}
-              </Nav.Link>
+              
             </Nav>
           </Navbar.Collapse>
         </Container>
