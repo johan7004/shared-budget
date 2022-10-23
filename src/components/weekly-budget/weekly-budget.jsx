@@ -53,6 +53,9 @@ function WeeklyBudget() {
     updateUserBudget(userBudget);
 
     // window.location.href = window.location.origin;
+    setTimeout(function(){
+      window.location.href = window.location.origin;
+   }, 800); 
   
   };
 
