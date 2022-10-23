@@ -39,18 +39,20 @@ function WeeklyBudget() {
     const weeklyBudgetValue = e.target.elements.weeklyBudget.value;
     const monthlyBudgetValue = e.target.elements.monthlyBudget.value;
     const currencyValue = e.target.elements.weeklyCurrency.value;
+    const totalBalanceValue = e.target.elements.totalBalance.value;
+    const availableBalanceValue = totalBalanceValue;
     const weekTarget = weeklyBudgetValue;
-    console.log(`for submitted ${monthlyBudgetValue}`);
-    console.log(currencyValue);
     const userBudget = {
       weeklyBudgetValue,
       currencyValue,
       monthlyBudgetValue,
       weekTarget,
+      totalBalanceValue,
+      availableBalanceValue
     };
     updateUserBudget(userBudget);
 
-    //window.location.href = window.location.origin;
+    window.location.href = window.location.origin;
   };
 
   const addMoneyPot = (e) => {
@@ -135,6 +137,14 @@ function WeeklyBudget() {
                   type="number"
                   placeholder="Weekly budget"
                   name="weeklyBudget"
+                  required="required"
+                />
+              </Col>
+              <Col>
+                <Form.Control
+                  type="number"
+                  placeholder="Total Balance"
+                  name="totalBalance"
                   required="required"
                 />
               </Col>
