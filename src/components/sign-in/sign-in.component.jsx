@@ -19,9 +19,11 @@ function SignInForm({
   };
 
   useEffect(() => {
+    console.log(currentUser)
     if (currentUser) {
-      window.location.href = window.location.origin;
-    }
+       window.location.href = window.location.origin + '/weekly-budget';
+      console.log(currentUser)
+    } 
   }, [currentUser]);
 
   return (

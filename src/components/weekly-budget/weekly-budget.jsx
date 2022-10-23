@@ -52,7 +52,8 @@ function WeeklyBudget() {
     };
     updateUserBudget(userBudget);
 
-    window.location.href = window.location.origin;
+    // window.location.href = window.location.origin;
+  
   };
 
   const addMoneyPot = (e) => {
