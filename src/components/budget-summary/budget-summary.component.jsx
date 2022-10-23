@@ -116,7 +116,10 @@ export default function BudgetSummary() {
       currencyValue,
       monthlyBudgetValue,
       weekTarget,
+      totalBalanceValue,
+      availableBalanceValue
     };
+    console.log(`updating user budget values`)
    updateUserBudget(userBudget);
 
   }, [
@@ -124,9 +127,8 @@ export default function BudgetSummary() {
     currencyValue,
     monthlyBudgetValue,
     weekTarget,
-    availableBalanceValue,
     totalBalanceValue,
-    expenses
+    availableBalanceValue
   ]);
 
   useEffect(() => {
