@@ -12,6 +12,8 @@ export default function NavigationBar() {
     await signOutUser();
   };
 
+
+
   return (
     <>
       <Navbar bg="light" expand="lg" className="navigation-container">
@@ -30,13 +32,19 @@ export default function NavigationBar() {
                 ""
               )}
 
-              
-                {currentUser ? (
-                 <Nav.Link as={Link} to="/" > <button onClick={signOutHandle}> SIGN OUT</button></Nav.Link>
-                ) : (
-                  <Nav.Link as={Link} to="sign-in">SIGN UP</Nav.Link>
-                )}
-              
+              {currentUser ? (
+                <>
+                  
+                  <Nav.Link as={Link} to="/">
+                    <button onClick={signOutHandle}> SIGN OUT</button>
+                  </Nav.Link>
+                  <span className="user-name">{currentUser.displayName? `Hey!! ${currentUser.displayName}`:""}</span>
+                </>
+              ) : (
+                <Nav.Link as={Link} to="sign-in">
+                  SIGN UP
+                </Nav.Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
