@@ -139,7 +139,7 @@ export const updateUserBudget = async (budgetValues) => {
 
     const userCollection = collection(userDb, "users");
     const userId = async () => {
-      if (auth.currentUser && weeklyBudgetValue) {
+      if (auth.currentUser && weeklyBudgetValue && totalBalanceValue) {
         const { uid } = await auth.currentUser;
         await setDoc(
           doc(userCollection, uid),
