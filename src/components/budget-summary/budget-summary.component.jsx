@@ -21,12 +21,14 @@ import {
   updateUserExpense,
   updateUserMoneyPot,
   updateUserAvailableBalance,
-  updateUserTotalBalance
+  updateUserTotalBalance,
 } from "./../../utils/firebase.config.js";
 import { UserContext } from "./../context/user.context";
 import piggyBank from "./../../assets/images/piggy-bank.png";
+import CardSpinner from "../card-spinner/card-spinner.component";
 
 export default function BudgetSummary() {
+  const [showSpinner, setShowSpinner] = useState(true);
   const [weeklyBudgetValue, setWeeklyBudget] = useState();
   const [monthlyBudgetValue, setMonthlyBudget] = useState();
   const [currencyValue, setCurrencyValue] = useState();
@@ -83,6 +85,7 @@ export default function BudgetSummary() {
       setExpenses(expenseValues);
       setTotalBalance(totalBalanceValue);
       setAvailableBalance(availableBalanceValue);
+      setShowSpinner(false);
     }
   }, [budgetValues, expenseValues]);
 
@@ -117,18 +120,17 @@ export default function BudgetSummary() {
       monthlyBudgetValue,
       weekTarget,
       totalBalanceValue,
-      availableBalanceValue
+      availableBalanceValue,
     };
-    console.log(`updating user budget values`)
-   updateUserBudget(userBudget);
-
+    console.log(`updating user budget values`);
+    updateUserBudget(userBudget);
   }, [
     weeklyBudgetValue,
     currencyValue,
     monthlyBudgetValue,
     weekTarget,
     totalBalanceValue,
-    availableBalanceValue
+    availableBalanceValue,
   ]);
 
   useEffect(() => {
@@ -145,18 +147,14 @@ export default function BudgetSummary() {
     const potCurrentValue = +currentValue;
 
     if (userInputValue >= potTargetValue) {
-
       setNewPotValue(userInputValue + potCurrentValue);
     } else {
       setNewPotValue(userInputValue + potCurrentValue);
-
     }
   };
 
-
   const moneyDropHandler = (e, potData) => {
     e.preventDefault();
-  
 
     const userTarget = potData.potTarget;
     const userPotCurrentValue = potData.newPotValue;
@@ -168,13 +166,12 @@ export default function BudgetSummary() {
 
         moneyPotValues[potIndex].currentPotValue = potData.newPotValue;
 
-        
         setAvailableBalance(availableBalanceValue - potData.newPotValue);
 
         setMoneyPotValues(moneyPotValues);
         updateUserExpense(expenses);
         updateUserMoneyPot(moneyPotValues);
-        
+
         setShowToast(false);
         setNewPotValue(0); // to reset the values not to affect other Pot's progress bar
       } else {
@@ -189,14 +186,14 @@ export default function BudgetSummary() {
     } else {
       updateUserAvailableBalance(availableBalanceValue);
     }
-  },[availableBalanceValue])
+  }, [availableBalanceValue]);
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
     } else {
       updateUserTotalBalance(totalBalanceValue);
     }
-  },[totalBalanceValue])
+  }, [totalBalanceValue]);
 
   return (
     <Container className="summary-container">
@@ -232,6 +229,7 @@ export default function BudgetSummary() {
 
               {currentUser ? (
                 <Fragment>
+                  {showSpinner ? <CardSpinner /> : ""}
                   <Card.Text>
                     For This Week : {weeklyBudgetValue} {currencyValue}
                   </Card.Text>
@@ -344,7 +342,7 @@ export default function BudgetSummary() {
                           />
                           <Button
                             onClick={(e) =>
-                              moneyDropHandler(e,{
+                              moneyDropHandler(e, {
                                 potName,
                                 potTarget,
                                 newPotValue,
@@ -376,7 +374,7 @@ export default function BudgetSummary() {
                 </Col>
               );
             })
-          : ""}
+          : <h1>No Money Pots Added</h1>}
       </Row>
     </Container>
   );

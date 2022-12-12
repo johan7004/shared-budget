@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import Home from "./routes/home/home.component";
 import NavigationBar from "./routes/Navigation/navigation.component";
+import BudgetSummary from './components/budget-summary/budget-summary.component.jsx'
 import WeeklyBudgetPage from "./routes/weekly-budget/weekly-budget";
 import SignInPage from "./routes/sign-in/sign-in-page.component";
 import { UserContext } from "./components/context/user.context.jsx";
@@ -31,6 +32,7 @@ function App() {
     <Routes>
       <Route  path="/" element={<NavigationBar />}>
         <Route index element={<Home />}></Route>
+        <Route path="summary" element={<BudgetSummary />}></Route>
         <Route path="weekly-budget" element={<WeeklyBudgetPage />}></Route>
         <Route exact path="sign-in" element={<SignInPage />}></Route>
         

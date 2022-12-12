@@ -66,6 +66,11 @@
 .piggy-bank {
   &__container {
     text-align: center;
+
+    h1{
+      color:white;
+      margin: 25px auto;
+    }
   }
   &__item {
     position: relative;

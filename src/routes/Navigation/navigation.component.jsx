@@ -19,7 +19,10 @@ export default function NavigationBar() {
       <Navbar bg="light" expand="lg" className="navigation-container">
         <Container>
           <Navbar.Brand>
-            <Link to="">Shared-Budget</Link>
+          {!currentUser?
+          
+            <Link to="">Shared-Budget</Link>:<Link to="summary">Shared-Budget</Link>
+          }
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
