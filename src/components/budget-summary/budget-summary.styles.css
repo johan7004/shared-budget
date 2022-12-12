@@ -96,6 +96,10 @@
 .piggy-bank__container {
   text-align: center;
 }
+.piggy-bank__container h1 {
+  color: white;
+  margin: 25px auto;
+}
 .piggy-bank__item {
   position: relative;
 }

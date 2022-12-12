@@ -21,7 +21,7 @@ function SignInForm({
   useEffect(() => {
     console.log(currentUser)
     if (currentUser) {
-       window.location.href = window.location.origin + '/weekly-budget';
+       window.location.href = window.location.origin + '/summary';
       console.log(currentUser)
     } 
   }, [currentUser]);
