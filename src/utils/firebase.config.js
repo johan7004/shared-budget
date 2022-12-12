@@ -139,6 +139,7 @@ export const updateUserBudget = async (budgetValues) => {
 
     const userCollection = collection(userDb, "users");
     const userId = async () => {
+      console.log('submit start')
       if (auth.currentUser && weeklyBudgetValue && totalBalanceValue) {
         const { uid } = await auth.currentUser;
         await setDoc(
@@ -156,7 +157,9 @@ export const updateUserBudget = async (budgetValues) => {
           },
           { merge: true }
         );
+
       }
+      return true;
     };
 
     return userId();
