@@ -20,8 +20,10 @@ import "react-calendar/dist/Calendar.css";
 import { UserContext } from "./../context/user.context";
 
 import { MoneyPotContext } from "./../context/moneyPot.context";
+import ButtonSpinner from "../button-spinner/button-spinner.component.jsx";
 
 function WeeklyBudget() {
+  const [submitSpinner, setSubmitSpinner] = useState(null);
   const [currencyList, setCurrencyList] = useState();
   const [moneyPot, setMoneyPot] = useState([]);
   const [weeklyResetDate, setWeeklyResetDate] = useState(new Date());
@@ -35,6 +37,7 @@ function WeeklyBudget() {
   }, []);
 
   const submitHandler = (e) => {
+    setSubmitSpinner(false);
     e.preventDefault();
     const weeklyBudgetValue = e.target.elements.weeklyBudget.value;
     const monthlyBudgetValue = e.target.elements.monthlyBudget.value;
@@ -48,15 +51,12 @@ function WeeklyBudget() {
       monthlyBudgetValue,
       weekTarget,
       totalBalanceValue,
-      availableBalanceValue
+      availableBalanceValue,
     };
-    updateUserBudget(userBudget);
 
-    // window.location.href = window.location.origin;
-    setTimeout(function(){
-      window.location.href = window.location.origin;
-   }, 800); 
-  
+    updateUserBudget(userBudget)
+      .then((res) => setSubmitSpinner(res))
+      .then(() => (window.location = window.location.origin + "/summary"));
   };
 
   const addMoneyPot = (e) => {
@@ -88,7 +88,7 @@ function WeeklyBudget() {
         //updateUserMoneyPot(moneyPot);
         setMoneyPotValues(moneyPot);
         return;
-      } 
+      }
     }
   }, [currentUser, moneyPot, setMoneyPotValues]);
 
@@ -96,7 +96,7 @@ function WeeklyBudget() {
     if (initialRender.current) {
       initialRender.current = false;
     } else {
-     updateUserMoneyPot(moneyPot);
+      updateUserMoneyPot(moneyPot);
       setMoneyPotValues(moneyPot);
     }
   }, [moneyPot, setMoneyPotValues]);
@@ -199,8 +199,12 @@ function WeeklyBudget() {
                 />
               </Col>
             </Row>
-            <Button variant="primary" type="submit">
-              Submit
+            <Button className="submit" variant="primary" type="submit">
+              {submitSpinner === null
+                ? "Submit"
+                : submitSpinner
+                ?  '✓'
+                : <ButtonSpinner />}
             </Button>
           </Form>
         </Col>
