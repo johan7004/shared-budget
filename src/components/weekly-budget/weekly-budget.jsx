@@ -20,7 +20,6 @@ import "react-calendar/dist/Calendar.css";
 import { UserContext } from "./../context/user.context";
 
 import { MoneyPotContext } from "./../context/moneyPot.context";
-import CardSpinner from "../card-spinner/card-spinner.component.jsx";
 import ButtonSpinner from "../button-spinner/button-spinner.component.jsx";
 
 function WeeklyBudget() {
