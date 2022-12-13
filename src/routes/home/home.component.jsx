@@ -7,6 +7,7 @@ export default function Home() {
   return (
     <Container className="home-container">
        <HomePage />
+       <HomePage />
     </Container>
   );
 }
