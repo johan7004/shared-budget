@@ -135,6 +135,7 @@ export const updateUserBudget = async (budgetValues) => {
       weekTarget,
       totalBalanceValue,
       availableBalanceValue,
+      expenses
     } = budgetValues;
 
     const userCollection = collection(userDb, "users");
@@ -152,7 +153,7 @@ export const updateUserBudget = async (budgetValues) => {
               weekTarget: weekTarget,
               totalBalanceValue: totalBalanceValue,
               availableBalanceValue: availableBalanceValue,
-              expenses: [],
+              expenses: expenses?expenses:[],
             },
           },
           { merge: true }

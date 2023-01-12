@@ -77,9 +77,9 @@
 
     .toast{
       &__container {
-        position: absolute;
         top:25%;
         z-index: 9999;
+        position: absolute;
 
         .toast-body-wrap{
           
@@ -92,6 +92,11 @@
               margin-top:5px;
               margin-bottom:5px;
             }
+
+            input{
+              margin-bottom:10px;
+            }
+
           }
         }
       }

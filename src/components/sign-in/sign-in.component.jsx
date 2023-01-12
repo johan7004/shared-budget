@@ -21,7 +21,7 @@ function SignInForm({
   useEffect(() => {
     console.log(currentUser)
     if (currentUser) {
-       window.location.href = window.location.origin + '/summary';
+       window.location.href = window.location.origin + '/dashboard';
       console.log(currentUser)
     } 
   }, [currentUser]);
