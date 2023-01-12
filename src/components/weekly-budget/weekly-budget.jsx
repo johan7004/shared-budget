@@ -117,9 +117,6 @@ console.log(moneyPot)
     setMoneyPot(removedMoneyPot);
   };
 
-  const dateTileDisabled = ({ activeStartDate, date, view }) => {
-    return date < new Date();
-  };
 
  
 
