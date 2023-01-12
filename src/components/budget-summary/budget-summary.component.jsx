@@ -59,11 +59,11 @@ export default function BudgetSummary() {
     "Public Transport",
   ];
 
-  const toastToggle = (e, toastID, potValue) => {
+  const toastToggle = (e, toastID, potValue, position) => {
     setToastId(toastID);
-    if (!showToast) {
+    if (!showToast && position==="outside") {
       setShowToast(true);
-    } else {
+    } else if(showToast && position==="inside") {
       setShowToast(false);
     }
   };
@@ -121,9 +121,12 @@ export default function BudgetSummary() {
       weekTarget,
       totalBalanceValue,
       availableBalanceValue,
+      expenses
     };
     console.log(`updating user budget values`);
+    
     updateUserBudget(userBudget);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     weeklyBudgetValue,
     currencyValue,
@@ -156,6 +159,8 @@ export default function BudgetSummary() {
   const moneyDropHandler = (e, potData) => {
     e.preventDefault();
 
+    console.log(potData)
+
     const userTarget = potData.potTarget;
     const userPotCurrentValue = potData.newPotValue;
     if (userPotCurrentValue !== 0) {
@@ -169,7 +174,7 @@ export default function BudgetSummary() {
         setAvailableBalance(availableBalanceValue - potData.newPotValue);
 
         setMoneyPotValues(moneyPotValues);
-        updateUserExpense(expenses);
+       // updateUserExpense(expenses);
         updateUserMoneyPot(moneyPotValues);
 
         setShowToast(false);
@@ -229,12 +234,12 @@ export default function BudgetSummary() {
 
               {currentUser ? (
                 <Fragment>
-                  {showSpinner ? <CardSpinner /> : ""}
+                  {showSpinner &&weeklyBudgetValue ? <CardSpinner /> : ""}
                   <Card.Text>
-                    For This Week : {weeklyBudgetValue} {currencyValue}
+                    For This Week : {!weeklyBudgetValue?'Set Goals':weeklyBudgetValue} {currencyValue}
                   </Card.Text>
                   <Card.Text>
-                    For This Month : {monthlyBudgetValue} {currencyValue}
+                    For This Month : {!monthlyBudgetValue?'Set Goals':monthlyBudgetValue} {currencyValue}
                   </Card.Text>
                   <Card.Text>
                     This week Target : {weekTarget} {currencyValue}
@@ -304,11 +309,19 @@ export default function BudgetSummary() {
 
               return (
                 <Col key={potId} className="piggy-bank__item">
-                  <Toast
+                
+                  <Card
+                    className="piggy-bank__item-card"
+                    onClick={(e) => {
+                      toastToggle(e, potId, potCurrentValue,"outside");
+                    }}
+                  >
+                    <img key={potId} src={piggyBank} alt="piggy" />
+                    <Toast
                     className="toast__container"
                     name={potId}
                     show={potId === toastId ? showToast : false}
-                    onClose={toastToggle}
+                    onClose={e=>toastToggle(e, potId, potCurrentValue,"inside")}
                   >
                     <Toast.Header className="toast__header">
                       <strong className="me-auto">{potName}</strong>
@@ -347,6 +360,7 @@ export default function BudgetSummary() {
                                 potTarget,
                                 newPotValue,
                                 potId,
+                                expenses
                               })
                             }
                             variant="primary"
@@ -358,13 +372,6 @@ export default function BudgetSummary() {
                       </div>
                     </Toast.Body>
                   </Toast>
-                  <Card
-                    className="piggy-bank__item-card"
-                    onClick={(e) => {
-                      toastToggle(e, potId, potCurrentValue);
-                    }}
-                  >
-                    <img key={potId} src={piggyBank} alt="piggy" />
                     <div className="piggy-bank__info">
                       <p className="piggy-bank__info-text">{potName}</p>
                       <p className="piggy-bank__info-text">{potTarget}</p>

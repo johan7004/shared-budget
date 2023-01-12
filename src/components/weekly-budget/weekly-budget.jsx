@@ -15,7 +15,7 @@ import {
 } from "./../../utils/firebase.config.js";
 import "./weekly-budget.css";
 import CurrencyList from "currency-list";
-import Calendar from "react-calendar";
+
 import "react-calendar/dist/Calendar.css";
 import { UserContext } from "./../context/user.context";
 
@@ -26,8 +26,6 @@ function WeeklyBudget() {
   const [submitSpinner, setSubmitSpinner] = useState(null);
   const [currencyList, setCurrencyList] = useState();
   const [moneyPot, setMoneyPot] = useState([]);
-  const [weeklyResetDate, setWeeklyResetDate] = useState(new Date());
-  const [monthlyResetDate, setMonthlyResetDate] = useState(new Date());
   const { currentUser } = useContext(UserContext);
   const { setMoneyPotValues } = useContext(MoneyPotContext);
   let initialRender = useRef(true);
@@ -56,7 +54,7 @@ function WeeklyBudget() {
 
     updateUserBudget(userBudget)
       .then((res) => setSubmitSpinner(res))
-      .then(() => (window.location = window.location.origin + "/summary"));
+      .then(() => (window.location = window.location.origin + "/dashboard"));
   };
 
   const addMoneyPot = (e) => {
@@ -70,7 +68,7 @@ function WeeklyBudget() {
     for (let i = 1; i < size; i++) {
       code += random[Math.abs(Math.floor(Math.random() * random.length))];
     }
-
+console.log(moneyPot)
     setMoneyPot((moneyPot) => [
       ...moneyPot,
       {
@@ -123,12 +121,7 @@ function WeeklyBudget() {
     return date < new Date();
   };
 
-  const weeklyDataReset = (nextValue) => {
-    setWeeklyResetDate(nextValue);
-  };
-  const monthlyDataReset = (nextValue) => {
-    setMonthlyResetDate(nextValue);
-  };
+ 
 
   return (
     <Container>
@@ -176,26 +169,6 @@ function WeeklyBudget() {
                   placeholder="monthly budget"
                   name="monthlyBudget"
                   required="required"
-                />
-              </Col>
-            </Row>
-            <Row className="dates-container">
-              <Col>
-                <h3 className="dates-container__label">For Weekly Reset</h3>
-                <Calendar
-                  className="calendar-container"
-                  onChange={weeklyDataReset}
-                  value={weeklyResetDate}
-                  tileDisabled={dateTileDisabled}
-                />
-              </Col>
-              <Col>
-                <h3 className="dates-container__label">For Monthly Reset</h3>
-                <Calendar
-                  className="calendar-container"
-                  onChange={monthlyDataReset}
-                  value={monthlyResetDate}
-                  tileDisabled={dateTileDisabled}
                 />
               </Col>
             </Row>

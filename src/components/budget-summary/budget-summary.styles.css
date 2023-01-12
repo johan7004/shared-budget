@@ -104,9 +104,9 @@
   position: relative;
 }
 .piggy-bank__item .toast__container {
-  position: absolute;
   top: 25%;
   z-index: 9999;
+  position: absolute;
 }
 .piggy-bank__item .toast__container .toast-body-wrap .toast-body__container {
   display: flex;
@@ -116,6 +116,9 @@
 .piggy-bank__item .toast__container .toast-body-wrap .toast-body__container span {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+.piggy-bank__item .toast__container .toast-body-wrap .toast-body__container input {
+  margin-bottom: 10px;
 }
 .piggy-bank__item-card {
   background: none;

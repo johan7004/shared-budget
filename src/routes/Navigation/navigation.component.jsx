@@ -12,17 +12,16 @@ export default function NavigationBar() {
     await signOutUser();
   };
 
-
-
   return (
     <>
       <Navbar bg="light" expand="lg" className="navigation-container">
         <Container>
           <Navbar.Brand>
-          {!currentUser?
-          
-            <Link to="">Shared-Budget</Link>:<Link to="summary">Shared-Budget</Link>
-          }
+            {!currentUser ? (
+              <Link to="">Shared-Budget</Link>
+            ) : (
+              <Link to="dashboard">Shared-Budget</Link>
+            )}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -37,15 +36,18 @@ export default function NavigationBar() {
 
               {currentUser ? (
                 <>
-                  
                   <Nav.Link as={Link} to="/">
                     <button onClick={signOutHandle}> SIGN OUT</button>
                   </Nav.Link>
-                  <span className="user-name">{currentUser.displayName? `Hey!! ${currentUser.displayName}`:""}</span>
+                  <span className="user-name">
+                    {currentUser.displayName
+                      ? `Hey!! ${currentUser.displayName}`
+                      : ""}
+                  </span>
                 </>
               ) : (
                 <Nav.Link as={Link} to="sign-in">
-                  SIGN UP
+                  SIGN IN
                 </Nav.Link>
               )}
             </Nav>

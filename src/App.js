@@ -32,7 +32,7 @@ function App() {
     <Routes>
       <Route  path="/" element={<NavigationBar />}>
         <Route index element={<Home />}></Route>
-        <Route path="summary" element={<BudgetSummary />}></Route>
+        <Route path="dashboard" element={<BudgetSummary />}></Route>
         <Route path="weekly-budget" element={<WeeklyBudgetPage />}></Route>
         <Route exact path="sign-in" element={<SignInPage />}></Route>
         
