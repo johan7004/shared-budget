@@ -10,6 +10,7 @@ import { UserContext } from "./components/context/user.context.jsx";
 import { BudgetContext } from "./components/context/budget.context.jsx";
 import {MoneyPotContext} from './components/context/moneyPot.context';
 import { userBudgetValues, userMoneyPotValues} from './utils/firebase.config';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const { currentUser } = useContext(UserContext);
