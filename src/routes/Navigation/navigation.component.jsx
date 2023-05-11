@@ -14,7 +14,7 @@ export default function NavigationBar() {
 
   return (
     <>
-      <Navbar bg="light" expand="lg" className="navigation-container">
+      <Navbar  expand="lg" className="navigation-container">
         <Container>
           <Navbar.Brand>
             {!currentUser ? (
